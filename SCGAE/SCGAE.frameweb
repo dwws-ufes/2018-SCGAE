@@ -327,6 +327,9 @@
     <packagedElement xsi:type="frameweb:ResultDependency" client="//@compose.2/Controller%20Package/emitirCupomController" supplier="//@compose.2/View%20Package/CupomRefeicaoImpresso" resultMethod="//@compose.2/Controller%20Package/emitirCupomController/imprimeCupomRefeicao">
       <resultDependencyConstraint result="sucess"/>
     </packagedElement>
+    <packagedElement xsi:type="frameweb:ResultDependency" client="//@compose.2/Controller%20Package/emitirCupomController" supplier="//@compose.2/View%20Package/EmitirCupom" resultMethod="//@compose.2/Controller%20Package/emitirCupomController/listarRefeicoesDisponiveis">
+      <resultDependencyConstraint result="success"/>
+    </packagedElement>
   </compose>
   <compose xsi:type="frameweb:NavigationModel" name="SCGAE_Login">
     <packagedElement xsi:type="frameweb:ViewPackage" name="View Package">
@@ -354,6 +357,85 @@
     </packagedElement>
     <packagedElement xsi:type="frameweb:AuthSuccessUrl" client="//@compose.3/Controller%20Package/LoginController" supplier="//@compose.3/View%20Package/LoginSuccess">
       <resultDependencyConstraint result="null"/>
+    </packagedElement>
+  </compose>
+  <compose xsi:type="frameweb:NavigationModel" name="SCGAE_ValidarCupomAlimentacao">
+    <packagedElement xsi:type="frameweb:ViewPackage" name="View Package">
+      <packagedElement xsi:type="frameweb:Page" name="ValidacaoCupomAlimentacao">
+        <ownedAttribute xsi:type="frameweb:NavigationCompositionWhole" type="//@compose.4/View%20Package/DadosCupomAlimentacao" association="//@compose.4/View%20Package/@packagedElement.2"/>
+      </packagedElement>
+      <packagedElement xsi:type="frameweb:UIComponent" name="DadosCupomAlimentacao">
+        <ownedAttribute xsi:type="frameweb:UIComponentField" name="idCupom">
+          <type xsi:type="uml:PrimitiveType" href="JAVA.frameweb#//@compose.0/int"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xsi:type="frameweb:NavigationAssociation" memberEnd="//@compose.4/View%20Package/@packagedElement.2/@ownedEnd.0 //@compose.4/View%20Package/ValidacaoCupomAlimentacao/@ownedAttribute.0">
+        <ownedEnd xsi:type="frameweb:NavigationCompositionPart" type="//@compose.4/View%20Package/ValidacaoCupomAlimentacao" association="//@compose.4/View%20Package/@packagedElement.2"/>
+      </packagedElement>
+      <packagedElement xsi:type="frameweb:Page" name="ValidacaoCupomAlimentacaoSuccess"/>
+      <packagedElement xsi:type="frameweb:Page" name="ValidacaoCupomAlimentacaoFailure"/>
+    </packagedElement>
+    <packagedElement xsi:type="frameweb:ControllerPackage" name="Controller Package">
+      <packagedElement xsi:type="frameweb:FrontControllerClass" name="ValidacaCupomAlimentacaoController">
+        <ownedOperation xsi:type="frameweb:FrontControllerMethod" name="validacaoCupomAlimentacao">
+          <ownedParameter name="idCupom"/>
+        </ownedOperation>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xsi:type="frameweb:FrontControllerDependency" client="//@compose.4/View%20Package/ValidacaoCupomAlimentacao" supplier="//@compose.4/Controller%20Package/ValidacaCupomAlimentacaoController" method="//@compose.4/Controller%20Package/ValidacaCupomAlimentacaoController/validacaoCupomAlimentacao"/>
+    <packagedElement xsi:type="frameweb:ResultDependency" client="//@compose.4/Controller%20Package/ValidacaCupomAlimentacaoController" supplier="//@compose.4/View%20Package/ValidacaoCupomAlimentacaoSuccess" resultMethod="//@compose.4/Controller%20Package/ValidacaCupomAlimentacaoController/validacaoCupomAlimentacao">
+      <resultDependencyConstraint result="success"/>
+    </packagedElement>
+    <packagedElement xsi:type="frameweb:PageDependency" client="//@compose.4/View%20Package/ValidacaoCupomAlimentacaoSuccess" supplier="//@compose.4/View%20Package/ValidacaoCupomAlimentacao">
+      <pageDependencyConstraint/>
+    </packagedElement>
+    <packagedElement xsi:type="frameweb:ResultDependency" client="//@compose.4/Controller%20Package/ValidacaCupomAlimentacaoController" supplier="//@compose.4/View%20Package/ValidacaoCupomAlimentacaoFailure" resultMethod="//@compose.4/Controller%20Package/ValidacaCupomAlimentacaoController/validacaoCupomAlimentacao">
+      <resultDependencyConstraint result="failure"/>
+    </packagedElement>
+    <packagedElement xsi:type="frameweb:PageDependency" client="//@compose.4/View%20Package/ValidacaoCupomAlimentacaoFailure" supplier="//@compose.4/View%20Package/ValidacaoCupomAlimentacao">
+      <pageDependencyConstraint/>
+    </packagedElement>
+  </compose>
+  <compose xsi:type="frameweb:NavigationModel" name="SCGAE_PagarAlimentacao">
+    <packagedElement xsi:type="frameweb:ViewPackage" name="View Package">
+      <packagedElement xsi:type="frameweb:Page" name="PagamentoCupomAlimentacao">
+        <ownedAttribute xsi:type="frameweb:NavigationCompositionWhole" type="//@compose.5/View%20Package/DadosCupom" association="//@compose.5/View%20Package/@packagedElement.2"/>
+      </packagedElement>
+      <packagedElement xsi:type="frameweb:UIComponent" name="DadosCupom">
+        <ownedAttribute xsi:type="frameweb:UIComponentField" name="idCupom"/>
+      </packagedElement>
+      <packagedElement xsi:type="frameweb:NavigationAssociation" memberEnd="//@compose.5/View%20Package/@packagedElement.2/@ownedEnd.0 //@compose.5/View%20Package/PagamentoCupomAlimentacao/@ownedAttribute.0">
+        <ownedEnd xsi:type="frameweb:NavigationCompositionPart" type="//@compose.5/View%20Package/PagamentoCupomAlimentacao" association="//@compose.5/View%20Package/@packagedElement.2"/>
+      </packagedElement>
+      <packagedElement xsi:type="frameweb:Page" name="AcrescentaCupomSuccess"/>
+      <packagedElement xsi:type="frameweb:Page" name="AcrescentaCupomFailure"/>
+      <packagedElement xsi:type="frameweb:Page" name="PagamentoRealizado"/>
+    </packagedElement>
+    <packagedElement xsi:type="frameweb:ControllerPackage" name="Controller Package">
+      <packagedElement xsi:type="frameweb:FrontControllerClass" name="PagamentoCupomAlimentacaoController">
+        <ownedOperation xsi:type="frameweb:FrontControllerMethod" name="acrescentaCupomParaPagamento">
+          <ownedParameter name="idCupom"/>
+        </ownedOperation>
+        <ownedOperation xsi:type="frameweb:FrontControllerMethod" name="realizaPagamento"/>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xsi:type="frameweb:ResultDependency" client="//@compose.5/Controller%20Package/PagamentoCupomAlimentacaoController" supplier="//@compose.5/View%20Package/AcrescentaCupomSuccess" resultMethod="//@compose.5/Controller%20Package/PagamentoCupomAlimentacaoController/acrescentaCupomParaPagamento">
+      <resultDependencyConstraint result="sucess"/>
+    </packagedElement>
+    <packagedElement xsi:type="frameweb:ResultDependency" client="//@compose.5/Controller%20Package/PagamentoCupomAlimentacaoController" supplier="//@compose.5/View%20Package/AcrescentaCupomFailure" resultMethod="//@compose.4/Controller%20Package/ValidacaCupomAlimentacaoController/validacaoCupomAlimentacao">
+      <resultDependencyConstraint result="failure"/>
+    </packagedElement>
+    <packagedElement xsi:type="frameweb:PageDependency" client="//@compose.5/View%20Package/AcrescentaCupomSuccess" supplier="//@compose.5/View%20Package/PagamentoCupomAlimentacao">
+      <pageDependencyConstraint/>
+    </packagedElement>
+    <packagedElement xsi:type="frameweb:PageDependency" client="//@compose.5/View%20Package/AcrescentaCupomFailure" supplier="//@compose.5/View%20Package/PagamentoCupomAlimentacao">
+      <pageDependencyConstraint/>
+    </packagedElement>
+    <packagedElement xsi:type="frameweb:PageDependency" client="//@compose.5/View%20Package/PagamentoRealizado" supplier="//@compose.5/View%20Package/PagamentoCupomAlimentacao">
+      <pageDependencyConstraint/>
+    </packagedElement>
+    <packagedElement xsi:type="frameweb:ResultDependency" client="//@compose.5/Controller%20Package/PagamentoCupomAlimentacaoController" supplier="//@compose.5/View%20Package/PagamentoRealizado" resultMethod="//@compose.5/Controller%20Package/PagamentoCupomAlimentacaoController/realizaPagamento">
+      <resultDependencyConstraint result="success"/>
     </packagedElement>
   </compose>
 </frameweb:FramewebProject>
