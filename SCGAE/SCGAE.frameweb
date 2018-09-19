@@ -167,7 +167,10 @@
         <ownedRule xsi:type="frameweb:DomainConstraints" name="Target Constraint" constrainedElement="//@compose.0/Entity%20Package/solicita/Target"/>
         <ownedRule xsi:type="frameweb:VocabularyConstraints" name="Vocabulary Constraint" constrainedElement="//@compose.0/Entity%20Package/solicita"/>
         <ownedEnd xsi:type="frameweb:DomainProperty" name="Source" type="//@compose.0/Entity%20Package/Aluno" association="//@compose.0/Entity%20Package/solicita"/>
-        <ownedEnd xsi:type="frameweb:DomainProperty" name="Target" type="//@compose.0/Entity%20Package/ReembolsoTransporte" association="//@compose.0/Entity%20Package/solicita"/>
+        <ownedEnd xsi:type="frameweb:DomainProperty" name="Target" type="//@compose.0/Entity%20Package/ReembolsoTransporte" association="//@compose.0/Entity%20Package/solicita">
+          <lowerValue xsi:type="uml:LiteralInteger"/>
+          <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
+        </ownedEnd>
       </packagedElement>
       <packagedElement xsi:type="frameweb:DomainAssociation" name="realiza" memberEnd="//@compose.0/Entity%20Package/realiza/Source //@compose.0/Entity%20Package/realiza/Target">
         <ownedRule xsi:type="frameweb:DomainConstraints" name="Source Constraint" constrainedElement="//@compose.0/Entity%20Package/realiza/Source"/>
@@ -179,12 +182,12 @@
           <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
         </ownedEnd>
       </packagedElement>
-      <packagedElement xsi:type="frameweb:DomainAssociation" name="da direito a" memberEnd="//@compose.0/Entity%20Package/da%20direito%20a/Source //@compose.0/Entity%20Package/da%20direito%20a/Target">
-        <ownedRule xsi:type="frameweb:DomainConstraints" name="Source Constraint" constrainedElement="//@compose.0/Entity%20Package/da%20direito%20a/Source"/>
-        <ownedRule xsi:type="frameweb:DomainConstraints" name="Target Constraint" constrainedElement="//@compose.0/Entity%20Package/da%20direito%20a/Target"/>
-        <ownedRule xsi:type="frameweb:VocabularyConstraints" name="Vocabulary Constraint" constrainedElement="//@compose.0/Entity%20Package/da%20direito%20a"/>
-        <ownedEnd xsi:type="frameweb:DomainProperty" name="Source" type="//@compose.0/Entity%20Package/CupomAlimentacao" association="//@compose.0/Entity%20Package/da%20direito%20a"/>
-        <ownedEnd xsi:type="frameweb:DomainProperty" name="Target" type="//@compose.0/Entity%20Package/Refeicao" association="//@compose.0/Entity%20Package/da%20direito%20a"/>
+      <packagedElement xsi:type="frameweb:DomainAssociation" name="é de uma" memberEnd="//@compose.0/Entity%20Package/é%20de%20uma/Source //@compose.0/Entity%20Package/é%20de%20uma/Target">
+        <ownedRule xsi:type="frameweb:DomainConstraints" name="Source Constraint" constrainedElement="//@compose.0/Entity%20Package/é%20de%20uma/Source"/>
+        <ownedRule xsi:type="frameweb:DomainConstraints" name="Target Constraint" constrainedElement="//@compose.0/Entity%20Package/é%20de%20uma/Target"/>
+        <ownedRule xsi:type="frameweb:VocabularyConstraints" name="Vocabulary Constraint" constrainedElement="//@compose.0/Entity%20Package/é%20de%20uma"/>
+        <ownedEnd xsi:type="frameweb:DomainProperty" name="Source" type="//@compose.0/Entity%20Package/CupomAlimentacao" association="//@compose.0/Entity%20Package/é%20de%20uma"/>
+        <ownedEnd xsi:type="frameweb:DomainProperty" name="Target" type="//@compose.0/Entity%20Package/Refeicao" association="//@compose.0/Entity%20Package/é%20de%20uma"/>
       </packagedElement>
       <packagedElement xsi:type="frameweb:DomainClass" name="PagamentoAlimentacao">
         <ownedAttribute xsi:type="frameweb:DateTimeAttribute" name="data" dateTimePrecision="date">
