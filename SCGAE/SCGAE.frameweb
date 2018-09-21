@@ -492,7 +492,9 @@
     <packagedElement xsi:type="frameweb:ControllerPackage" name="Controller Package">
       <packagedElement xsi:type="frameweb:FrontControllerClass" name="PagamentoCupomAlimentacaoController">
         <ownedOperation xsi:type="frameweb:FrontControllerMethod" name="acrescentaCupomParaPagamento">
-          <ownedParameter name="idCupom"/>
+          <ownedParameter name="idCupom">
+            <type xsi:type="uml:PrimitiveType" href="JAVA.frameweb#//@compose.0/int"/>
+          </ownedParameter>
         </ownedOperation>
         <ownedOperation xsi:type="frameweb:FrontControllerMethod" name="realizaPagamento"/>
       </packagedElement>
@@ -524,12 +526,23 @@
   </compose>
   <compose xsi:type="frameweb:ApplicationModel" name="SCGAE_ApplicationModel">
     <packagedElement xsi:type="frameweb:ApplicationPackage" name="Application Package">
-      <packagedElement xsi:type="frameweb:ServiceClass" name="EmitirCupomServiceImpl"/>
+      <packagedElement xsi:type="frameweb:ServiceClass" name="EmitirCupomServiceImpl">
+        <ownedOperation xsi:type="frameweb:ServiceMethod" name="listarRefeicoesDisponives">
+          <ownedParameter name="aluno" type="//@compose.0/Entity%20Package/Aluno"/>
+        </ownedOperation>
+        <ownedOperation xsi:type="frameweb:ServiceMethod" name="imprimeCupomRefeicao">
+          <ownedParameter name="refeicao" type="//@compose.0/Entity%20Package/Refeicao"/>
+        </ownedOperation>
+      </packagedElement>
       <packagedElement xsi:type="frameweb:ServiceInterface" name="EmitirCupomService"/>
       <packagedElement xsi:type="frameweb:ServiceInterface" name="LoginService"/>
       <packagedElement xsi:type="frameweb:ServiceInterface" name="VaidacaoCupomAlimentacaoService"/>
       <packagedElement xsi:type="frameweb:ServiceInterface" name="PagamentoCupomAlimentacaoService"/>
-      <packagedElement xsi:type="frameweb:ServiceClass" name="ValidacaoCupomAlimentacaoServiceImpl"/>
+      <packagedElement xsi:type="frameweb:ServiceClass" name="ValidacaoCupomAlimentacaoServiceImpl">
+        <ownedOperation xsi:type="frameweb:ServiceMethod" name="validacaoCupomAlimentacao">
+          <ownedParameter name="cupom" type="//@compose.0/Entity%20Package/CupomAlimentacao"/>
+        </ownedOperation>
+      </packagedElement>
       <packagedElement xsi:type="frameweb:ServiceRealization" supplier="//@compose.6/Application%20Package/LoginService"/>
       <packagedElement xsi:type="frameweb:DAOServiceAssociation" memberEnd="//@compose.6/Application%20Package/@packagedElement.7/Source //@compose.6/Application%20Package/@packagedElement.7/Target">
         <ownedRule xsi:type="frameweb:DomainConstraints" name="Source Constraint" constrainedElement="//@compose.6/Application%20Package/@packagedElement.7/Source"/>
@@ -547,10 +560,77 @@
         <ownedEnd name="Source" type="//@compose.6/Application%20Package/LoginServiceImpl" association="//@compose.6/Application%20Package/@packagedElement.10"/>
         <ownedEnd name="Target" type="//@compose.1/Persistence%20Package/UserDAO" association="//@compose.6/Application%20Package/@packagedElement.10"/>
       </packagedElement>
-      <packagedElement xsi:type="frameweb:ServiceClass" name="PagamentoCupomAlimentacaoServiceImpl"/>
+      <packagedElement xsi:type="frameweb:ServiceClass" name="PagamentoCupomAlimentacaoServiceImpl">
+        <ownedOperation xsi:type="frameweb:ServiceMethod" name="acrescentaCupomParaPagamento">
+          <ownedParameter name="idCupom">
+            <type xsi:type="uml:PrimitiveType" href="JAVA.frameweb#//@compose.0/int"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xsi:type="frameweb:ServiceMethod" name="realizaPagamento"/>
+      </packagedElement>
       <packagedElement xsi:type="frameweb:ServiceRealization" client="//@compose.6/Application%20Package/PagamentoCupomAlimentacaoServiceImpl" supplier="//@compose.6/Application%20Package/PagamentoCupomAlimentacaoService"/>
       <packagedElement xsi:type="frameweb:ServiceRealization" client="//@compose.6/Application%20Package/ValidacaoCupomAlimentacaoServiceImpl" supplier="//@compose.6/Application%20Package/VaidacaoCupomAlimentacaoService"/>
       <packagedElement xsi:type="frameweb:ServiceRealization" client="//@compose.6/Application%20Package/EmitirCupomServiceImpl" supplier="//@compose.6/Application%20Package/EmitirCupomService"/>
+      <packagedElement xsi:type="frameweb:DAOServiceAssociation" memberEnd="//@compose.6/Application%20Package/@packagedElement.15/Source //@compose.6/Application%20Package/@packagedElement.15/Target">
+        <ownedRule xsi:type="frameweb:DomainConstraints" name="Source Constraint" constrainedElement="//@compose.6/Application%20Package/@packagedElement.15/Source"/>
+        <ownedRule xsi:type="frameweb:DomainConstraints" name="Target Constraint" constrainedElement="//@compose.6/Application%20Package/@packagedElement.15/Target"/>
+        <ownedEnd name="Source" type="//@compose.6/Application%20Package/EmitirCupomServiceImpl" association="//@compose.6/Application%20Package/@packagedElement.15"/>
+        <ownedEnd name="Target" type="//@compose.1/Persistence%20Package/CupomAlimentacaoDAO" association="//@compose.6/Application%20Package/@packagedElement.15"/>
+      </packagedElement>
+      <packagedElement xsi:type="frameweb:DAOServiceAssociation" memberEnd="//@compose.6/Application%20Package/@packagedElement.16/Source //@compose.6/Application%20Package/@packagedElement.16/Target">
+        <ownedRule xsi:type="frameweb:DomainConstraints" name="Source Constraint" constrainedElement="//@compose.6/Application%20Package/@packagedElement.16/Source"/>
+        <ownedRule xsi:type="frameweb:DomainConstraints" name="Target Constraint" constrainedElement="//@compose.6/Application%20Package/@packagedElement.16/Target"/>
+        <ownedEnd name="Source" type="//@compose.6/Application%20Package/EmitirCupomServiceImpl" association="//@compose.6/Application%20Package/@packagedElement.16"/>
+        <ownedEnd name="Target" type="//@compose.1/Persistence%20Package/RefeicaoDAO" association="//@compose.6/Application%20Package/@packagedElement.16"/>
+      </packagedElement>
+      <packagedElement xsi:type="frameweb:DAOServiceAssociation" memberEnd="//@compose.6/Application%20Package/@packagedElement.17/Source //@compose.6/Application%20Package/@packagedElement.17/Target">
+        <ownedRule xsi:type="frameweb:DomainConstraints" name="Source Constraint" constrainedElement="//@compose.6/Application%20Package/@packagedElement.17/Source"/>
+        <ownedRule xsi:type="frameweb:DomainConstraints" name="Target Constraint" constrainedElement="//@compose.6/Application%20Package/@packagedElement.17/Target"/>
+        <ownedEnd name="Source" type="//@compose.6/Application%20Package/EmitirCupomServiceImpl" association="//@compose.6/Application%20Package/@packagedElement.17"/>
+        <ownedEnd name="Target" type="//@compose.1/Persistence%20Package/AlunoDAO" association="//@compose.6/Application%20Package/@packagedElement.17"/>
+      </packagedElement>
+      <packagedElement xsi:type="frameweb:DAOServiceAssociation" memberEnd="//@compose.6/Application%20Package/@packagedElement.18/Source //@compose.6/Application%20Package/@packagedElement.18/Target">
+        <ownedRule xsi:type="frameweb:DomainConstraints" name="Source Constraint" constrainedElement="//@compose.6/Application%20Package/@packagedElement.18/Source"/>
+        <ownedRule xsi:type="frameweb:DomainConstraints" name="Target Constraint" constrainedElement="//@compose.6/Application%20Package/@packagedElement.18/Target"/>
+        <ownedEnd name="Source" type="//@compose.6/Application%20Package/ValidacaoCupomAlimentacaoServiceImpl" association="//@compose.6/Application%20Package/@packagedElement.18"/>
+        <ownedEnd name="Target" type="//@compose.1/Persistence%20Package/CupomAlimentacaoDAO" association="//@compose.6/Application%20Package/@packagedElement.18"/>
+      </packagedElement>
+      <packagedElement xsi:type="frameweb:DAOServiceAssociation" memberEnd="//@compose.6/Application%20Package/@packagedElement.19/Source //@compose.6/Application%20Package/@packagedElement.19/Target">
+        <ownedRule xsi:type="frameweb:DomainConstraints" name="Source Constraint" constrainedElement="//@compose.6/Application%20Package/@packagedElement.19/Source"/>
+        <ownedRule xsi:type="frameweb:DomainConstraints" name="Target Constraint" constrainedElement="//@compose.6/Application%20Package/@packagedElement.19/Target"/>
+        <ownedEnd name="Source" type="//@compose.6/Application%20Package/ValidacaoCupomAlimentacaoServiceImpl" association="//@compose.6/Application%20Package/@packagedElement.19"/>
+        <ownedEnd name="Target" type="//@compose.1/Persistence%20Package/RestauranteDAO" association="//@compose.6/Application%20Package/@packagedElement.19"/>
+      </packagedElement>
+      <packagedElement xsi:type="frameweb:DAOServiceAssociation" memberEnd="//@compose.6/Application%20Package/@packagedElement.20/Source //@compose.6/Application%20Package/@packagedElement.20/Target">
+        <ownedRule xsi:type="frameweb:DomainConstraints" name="Source Constraint" constrainedElement="//@compose.6/Application%20Package/@packagedElement.20/Source"/>
+        <ownedRule xsi:type="frameweb:DomainConstraints" name="Target Constraint" constrainedElement="//@compose.6/Application%20Package/@packagedElement.20/Target"/>
+        <ownedEnd name="Source" type="//@compose.6/Application%20Package/PagamentoCupomAlimentacaoServiceImpl" association="//@compose.6/Application%20Package/@packagedElement.20"/>
+        <ownedEnd name="Target" type="//@compose.1/Persistence%20Package/PagamentoAlimentacaoDAO" association="//@compose.6/Application%20Package/@packagedElement.20"/>
+      </packagedElement>
+      <packagedElement xsi:type="frameweb:DAOServiceAssociation" memberEnd="//@compose.6/Application%20Package/@packagedElement.21/Source //@compose.6/Application%20Package/@packagedElement.21/Target">
+        <ownedRule xsi:type="frameweb:DomainConstraints" name="Source Constraint" constrainedElement="//@compose.6/Application%20Package/@packagedElement.21/Source"/>
+        <ownedRule xsi:type="frameweb:DomainConstraints" name="Target Constraint" constrainedElement="//@compose.6/Application%20Package/@packagedElement.21/Target"/>
+        <ownedEnd name="Source" type="//@compose.6/Application%20Package/PagamentoCupomAlimentacaoServiceImpl" association="//@compose.6/Application%20Package/@packagedElement.21"/>
+        <ownedEnd name="Target" type="//@compose.1/Persistence%20Package/CupomAlimentacaoDAO" association="//@compose.6/Application%20Package/@packagedElement.21"/>
+      </packagedElement>
+      <packagedElement xsi:type="frameweb:DAOServiceAssociation" memberEnd="//@compose.6/Application%20Package/@packagedElement.22/Source //@compose.6/Application%20Package/@packagedElement.22/Target">
+        <ownedRule xsi:type="frameweb:DomainConstraints" name="Source Constraint" constrainedElement="//@compose.6/Application%20Package/@packagedElement.22/Source"/>
+        <ownedRule xsi:type="frameweb:DomainConstraints" name="Target Constraint" constrainedElement="//@compose.6/Application%20Package/@packagedElement.22/Target"/>
+        <ownedEnd name="Source" type="//@compose.6/Application%20Package/PagamentoCupomAlimentacaoServiceImpl" association="//@compose.6/Application%20Package/@packagedElement.22"/>
+        <ownedEnd name="Target" type="//@compose.1/Persistence%20Package/EscolaDAO" association="//@compose.6/Application%20Package/@packagedElement.22"/>
+      </packagedElement>
+      <packagedElement xsi:type="frameweb:DAOServiceAssociation" memberEnd="//@compose.6/Application%20Package/@packagedElement.23/Source //@compose.6/Application%20Package/@packagedElement.23/Target">
+        <ownedRule xsi:type="frameweb:DomainConstraints" name="Source Constraint" constrainedElement="//@compose.6/Application%20Package/@packagedElement.23/Source"/>
+        <ownedRule xsi:type="frameweb:DomainConstraints" name="Target Constraint" constrainedElement="//@compose.6/Application%20Package/@packagedElement.23/Target"/>
+        <ownedEnd name="Source" type="//@compose.6/Application%20Package/EmitirCupomServiceImpl" association="//@compose.6/Application%20Package/@packagedElement.23"/>
+        <ownedEnd name="Target" type="//@compose.1/Persistence%20Package/DiaLetivoDAO" association="//@compose.6/Application%20Package/@packagedElement.23"/>
+      </packagedElement>
+      <packagedElement xsi:type="frameweb:DAOServiceAssociation" memberEnd="//@compose.6/Application%20Package/@packagedElement.24/Source //@compose.6/Application%20Package/@packagedElement.24/Target">
+        <ownedRule xsi:type="frameweb:DomainConstraints" name="Source Constraint" constrainedElement="//@compose.6/Application%20Package/@packagedElement.24/Source"/>
+        <ownedRule xsi:type="frameweb:DomainConstraints" name="Target Constraint" constrainedElement="//@compose.6/Application%20Package/@packagedElement.24/Target"/>
+        <ownedEnd name="Source" type="//@compose.6/Application%20Package/PagamentoCupomAlimentacaoServiceImpl" association="//@compose.6/Application%20Package/@packagedElement.24"/>
+        <ownedEnd name="Target" type="//@compose.1/Persistence%20Package/RestauranteDAO" association="//@compose.6/Application%20Package/@packagedElement.24"/>
+      </packagedElement>
     </packagedElement>
   </compose>
 </frameweb:FramewebProject>
