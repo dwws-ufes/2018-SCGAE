@@ -3,7 +3,8 @@
   <compose xsi:type="frameweb:EntityModel" name="SCGAE_EntityModel">
     <packagedElement xsi:type="frameweb:DomainPackage" name="Entity Package">
       <packagedElement xsi:type="frameweb:DomainClass" name="Aluno">
-        <generalization xsi:type="frameweb:DomainGeneralization" generalizationSet="//@compose.0/Entity%20Package/User.2"/>
+        <generalization xsi:type="frameweb:DomainGeneralization"/>
+        <generalization xsi:type="frameweb:DomainGeneralization" generalizationSet="//@compose.0/Entity%20Package/Usuario.2"/>
         <ownedAttribute xsi:type="frameweb:DomainAttribute" name="nome" visibility="private">
           <type xsi:type="uml:PrimitiveType" href="JAVA.frameweb#//@compose.0/String"/>
         </ownedAttribute>
@@ -63,7 +64,8 @@
         <ownedEnd xsi:type="frameweb:DomainProperty" name="Target" type="//@compose.0/Entity%20Package/Endereco" association="//@compose.0/Entity%20Package/mora%20em"/>
       </packagedElement>
       <packagedElement xsi:type="frameweb:DomainClass" name="Restaurante">
-        <generalization xsi:type="frameweb:DomainGeneralization" generalizationSet="//@compose.0/Entity%20Package/User.1"/>
+        <generalization xsi:type="frameweb:DomainGeneralization"/>
+        <generalization xsi:type="frameweb:DomainGeneralization" generalizationSet="//@compose.0/Entity%20Package/Usuario.1"/>
         <ownedAttribute xsi:type="frameweb:DomainAttribute" name="nome" visibility="private">
           <type xsi:type="uml:PrimitiveType" href="JAVA.frameweb#//@compose.0/String"/>
         </ownedAttribute>
@@ -78,7 +80,8 @@
         </ownedAttribute>
       </packagedElement>
       <packagedElement xsi:type="frameweb:DomainClass" name="Escola">
-        <generalization xsi:type="frameweb:DomainGeneralization" generalizationSet="//@compose.0/Entity%20Package/User.3"/>
+        <generalization xsi:type="frameweb:DomainGeneralization"/>
+        <generalization xsi:type="frameweb:DomainGeneralization" generalizationSet="//@compose.0/Entity%20Package/Usuario.3"/>
         <ownedAttribute xsi:type="frameweb:DomainAttribute" name="nome" visibility="private">
           <type xsi:type="uml:PrimitiveType" href="JAVA.frameweb#//@compose.0/String"/>
         </ownedAttribute>
@@ -252,36 +255,15 @@
           <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
         </ownedEnd>
       </packagedElement>
-      <packagedElement xsi:type="frameweb:AuthUser" name="User" powertypeExtent="//@compose.0/Entity%20Package/User.1 //@compose.0/Entity%20Package/User.2 //@compose.0/Entity%20Package/User.3">
-        <ownedAttribute xsi:type="frameweb:AuthUserName" name="username" visibility="private">
-          <type xsi:type="uml:PrimitiveType" href="JAVA.frameweb#//@compose.0/String"/>
-        </ownedAttribute>
-        <ownedAttribute xsi:type="frameweb:AuthPassword" name="password" visibility="private">
-          <type xsi:type="uml:PrimitiveType" href="JAVA.frameweb#//@compose.0/String"/>
-        </ownedAttribute>
-        <ownedAttribute xsi:type="frameweb:DomainAttribute" name="id" visibility="private">
-          <type xsi:type="uml:PrimitiveType" href="JAVA.frameweb#//@compose.0/long"/>
-        </ownedAttribute>
-      </packagedElement>
-      <packagedElement xsi:type="frameweb:AuthRole" name="Role">
-        <ownedAttribute xsi:type="frameweb:AuthRoleName" name="roleName" visibility="private">
-          <type xsi:type="uml:PrimitiveType" href="JAVA.frameweb#//@compose.0/String"/>
-        </ownedAttribute>
-      </packagedElement>
-      <packagedElement xsi:type="frameweb:AuthPermission" name="Permission">
-        <ownedAttribute xsi:type="frameweb:AuthPermName" name="permissionName" visibility="private">
-          <type xsi:type="uml:PrimitiveType" href="JAVA.frameweb#//@compose.0/String"/>
-        </ownedAttribute>
-      </packagedElement>
       <packagedElement xsi:type="frameweb:DomainAssociation" name="tem" memberEnd="//@compose.0/Entity%20Package/tem.1/Source //@compose.0/Entity%20Package/tem.1/Target">
         <ownedRule xsi:type="frameweb:DomainConstraints" name="Source Constraint" constrainedElement="//@compose.0/Entity%20Package/tem.1/Source"/>
         <ownedRule xsi:type="frameweb:DomainConstraints" name="Target Constraint" constrainedElement="//@compose.0/Entity%20Package/tem.1/Target"/>
         <ownedRule xsi:type="frameweb:VocabularyConstraints" name="Vocabulary Constraint" constrainedElement="//@compose.0/Entity%20Package/tem.1"/>
-        <ownedEnd xsi:type="frameweb:DomainProperty" name="Source" type="//@compose.0/Entity%20Package/Role" association="//@compose.0/Entity%20Package/tem.1">
+        <ownedEnd xsi:type="frameweb:DomainProperty" name="Source" association="//@compose.0/Entity%20Package/tem.1">
           <lowerValue xsi:type="uml:LiteralInteger"/>
           <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
         </ownedEnd>
-        <ownedEnd xsi:type="frameweb:DomainProperty" name="Target" type="//@compose.0/Entity%20Package/Permission" association="//@compose.0/Entity%20Package/tem.1">
+        <ownedEnd xsi:type="frameweb:DomainProperty" name="Target" association="//@compose.0/Entity%20Package/tem.1">
           <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
         </ownedEnd>
       </packagedElement>
@@ -289,17 +271,28 @@
         <ownedRule xsi:type="frameweb:DomainConstraints" name="Source Constraint" constrainedElement="//@compose.0/Entity%20Package/tem.2/Source"/>
         <ownedRule xsi:type="frameweb:DomainConstraints" name="Target Constraint" constrainedElement="//@compose.0/Entity%20Package/tem.2/Target"/>
         <ownedRule xsi:type="frameweb:VocabularyConstraints" name="Vocabulary Constraint" constrainedElement="//@compose.0/Entity%20Package/tem.2"/>
-        <ownedEnd xsi:type="frameweb:DomainProperty" name="Source" type="//@compose.0/Entity%20Package/User" association="//@compose.0/Entity%20Package/tem.2">
+        <ownedEnd xsi:type="frameweb:DomainProperty" name="Source" association="//@compose.0/Entity%20Package/tem.2">
           <lowerValue xsi:type="uml:LiteralInteger"/>
           <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
         </ownedEnd>
-        <ownedEnd xsi:type="frameweb:DomainProperty" name="Target" type="//@compose.0/Entity%20Package/Role" association="//@compose.0/Entity%20Package/tem.2">
+        <ownedEnd xsi:type="frameweb:DomainProperty" name="Target" association="//@compose.0/Entity%20Package/tem.2">
           <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
         </ownedEnd>
       </packagedElement>
-      <packagedElement xsi:type="frameweb:DomainGeneralizationSet" name="User" powertype="//@compose.0/Entity%20Package/User" generalization="//@compose.0/Entity%20Package/Restaurante/@generalization.0"/>
-      <packagedElement xsi:type="frameweb:DomainGeneralizationSet" name="User" powertype="//@compose.0/Entity%20Package/User" generalization="//@compose.0/Entity%20Package/Aluno/@generalization.0"/>
-      <packagedElement xsi:type="frameweb:DomainGeneralizationSet" name="User" powertype="//@compose.0/Entity%20Package/User" generalization="//@compose.0/Entity%20Package/Escola/@generalization.0"/>
+      <packagedElement xsi:type="frameweb:DomainClass" name="Usuario" powertypeExtent="//@compose.0/Entity%20Package/Usuario.1 //@compose.0/Entity%20Package/Usuario.2 //@compose.0/Entity%20Package/Usuario.3">
+        <ownedAttribute xsi:type="frameweb:IdAttribute" name="id">
+          <type xsi:type="uml:PrimitiveType" href="JAVA.frameweb#//@compose.0/int"/>
+        </ownedAttribute>
+        <ownedAttribute xsi:type="frameweb:DomainAttribute" name="login" visibility="private">
+          <type xsi:type="uml:PrimitiveType" href="JAVA.frameweb#//@compose.0/String"/>
+        </ownedAttribute>
+        <ownedAttribute xsi:type="frameweb:DomainAttribute" name="senha" visibility="private">
+          <type xsi:type="uml:PrimitiveType" href="JAVA.frameweb#//@compose.0/String"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xsi:type="frameweb:DomainGeneralizationSet" name="Usuario" powertype="//@compose.0/Entity%20Package/Usuario" generalization="//@compose.0/Entity%20Package/Restaurante/@generalization.1"/>
+      <packagedElement xsi:type="frameweb:DomainGeneralizationSet" name="Usuario" powertype="//@compose.0/Entity%20Package/Usuario" generalization="//@compose.0/Entity%20Package/Aluno/@generalization.1"/>
+      <packagedElement xsi:type="frameweb:DomainGeneralizationSet" name="Usuario" powertype="//@compose.0/Entity%20Package/Usuario" generalization="//@compose.0/Entity%20Package/Escola/@generalization.1"/>
     </packagedElement>
   </compose>
   <compose xsi:type="frameweb:PersistenceModel" name="SCGAE_PersistenceModel">
@@ -358,12 +351,12 @@
       <packagedElement xsi:type="frameweb:DAOInterface" name="DiaLetivoDAO"/>
       <packagedElement xsi:type="frameweb:DAORealization" client="//@compose.1/Persistence%20Package/DiaLetivoDAOJPA" supplier="//@compose.1/Persistence%20Package/DiaLetivoDAO"/>
       <packagedElement xsi:type="frameweb:DAOGeneralizationSet" name="DAOJPA" powertype="//@compose.1/Persistence%20Package/DAOJPA" generalization="//@compose.1/Persistence%20Package/DiaLetivoDAOJPA/@generalization.0"/>
-      <packagedElement xsi:type="frameweb:DAOClass" name="UserDAOJPA">
+      <packagedElement xsi:type="frameweb:DAOClass" name="UsuarioDAOJPA">
         <generalization xsi:type="frameweb:DAOGeneralization" generalizationSet="//@compose.1/Persistence%20Package/DAOJPA.9"/>
       </packagedElement>
-      <packagedElement xsi:type="frameweb:DAOInterface" name="UserDAO"/>
-      <packagedElement xsi:type="frameweb:DAORealization" client="//@compose.1/Persistence%20Package/UserDAOJPA" supplier="//@compose.1/Persistence%20Package/UserDAO"/>
-      <packagedElement xsi:type="frameweb:DAOGeneralizationSet" name="DAOJPA" powertype="//@compose.1/Persistence%20Package/DAOJPA" generalization="//@compose.1/Persistence%20Package/UserDAOJPA/@generalization.0"/>
+      <packagedElement xsi:type="frameweb:DAOInterface" name="UsuarioDAO"/>
+      <packagedElement xsi:type="frameweb:DAORealization" client="//@compose.1/Persistence%20Package/UsuarioDAOJPA" supplier="//@compose.1/Persistence%20Package/UsuarioDAO"/>
+      <packagedElement xsi:type="frameweb:DAOGeneralizationSet" name="DAOJPA" powertype="//@compose.1/Persistence%20Package/DAOJPA" generalization="//@compose.1/Persistence%20Package/UsuarioDAOJPA/@generalization.0"/>
     </packagedElement>
   </compose>
   <compose xsi:type="frameweb:NavigationModel" name="SCGAE_EmitirCupomAlimentacao">
@@ -548,7 +541,7 @@
         <ownedRule xsi:type="frameweb:DomainConstraints" name="Source Constraint" constrainedElement="//@compose.6/Application%20Package/@packagedElement.7/Source"/>
         <ownedRule xsi:type="frameweb:DomainConstraints" name="Target Constraint" constrainedElement="//@compose.6/Application%20Package/@packagedElement.7/Target"/>
         <ownedEnd name="Source" association="//@compose.6/Application%20Package/@packagedElement.7"/>
-        <ownedEnd name="Target" type="//@compose.1/Persistence%20Package/UserDAO" association="//@compose.6/Application%20Package/@packagedElement.7"/>
+        <ownedEnd name="Target" type="//@compose.1/Persistence%20Package/UsuarioDAO" association="//@compose.6/Application%20Package/@packagedElement.7"/>
       </packagedElement>
       <packagedElement xsi:type="frameweb:ServiceClass" name="LoginServiceImpl">
         <ownedOperation xsi:type="frameweb:ServiceMethod" name="login"/>
@@ -558,7 +551,7 @@
         <ownedRule xsi:type="frameweb:DomainConstraints" name="Source Constraint" constrainedElement="//@compose.6/Application%20Package/@packagedElement.10/Source"/>
         <ownedRule xsi:type="frameweb:DomainConstraints" name="Target Constraint" constrainedElement="//@compose.6/Application%20Package/@packagedElement.10/Target"/>
         <ownedEnd name="Source" type="//@compose.6/Application%20Package/LoginServiceImpl" association="//@compose.6/Application%20Package/@packagedElement.10"/>
-        <ownedEnd name="Target" type="//@compose.1/Persistence%20Package/UserDAO" association="//@compose.6/Application%20Package/@packagedElement.10"/>
+        <ownedEnd name="Target" type="//@compose.1/Persistence%20Package/UsuarioDAO" association="//@compose.6/Application%20Package/@packagedElement.10"/>
       </packagedElement>
       <packagedElement xsi:type="frameweb:ServiceClass" name="PagamentoCupomAlimentacaoServiceImpl">
         <ownedOperation xsi:type="frameweb:ServiceMethod" name="acrescentaCupomParaPagamento">
