@@ -304,8 +304,8 @@
       <packagedElement xsi:type="frameweb:DAOClass" name="DiaLetivoDAOJPA">
         <generalization xsi:type="frameweb:DAOGeneralization" generalizationSet="//@compose.1/Persistence%20Package/DAOJPA.8"/>
       </packagedElement>
-      <packagedElement xsi:type="frameweb:DAOInterface" name="Interface DAO"/>
-      <packagedElement xsi:type="frameweb:DAORealization" client="//@compose.1/Persistence%20Package/DiaLetivoDAOJPA" supplier="//@compose.1/Persistence%20Package/Interface%20DAO"/>
+      <packagedElement xsi:type="frameweb:DAOInterface" name="DiaLetivoDAO"/>
+      <packagedElement xsi:type="frameweb:DAORealization" client="//@compose.1/Persistence%20Package/DiaLetivoDAOJPA" supplier="//@compose.1/Persistence%20Package/DiaLetivoDAO"/>
       <packagedElement xsi:type="frameweb:DAOGeneralizationSet" name="DAOJPA" powertype="//@compose.1/Persistence%20Package/DAOJPA" generalization="//@compose.1/Persistence%20Package/DiaLetivoDAOJPA/@generalization.0"/>
     </packagedElement>
   </compose>

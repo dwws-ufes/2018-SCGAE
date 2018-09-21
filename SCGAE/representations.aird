@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:frameweb="http://nemo.inf.ufes.br/projects/frameweb/FW-2015" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/style/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/style">
-  <viewpoint:DAnalysis xmi:id="_HylzkLq0Eei-o9NGTE6rmw" selectedViews="_RTBoALq0Eei-o9NGTE6rmw" version="12.1.2.201804131029">
+  <viewpoint:DAnalysis xmi:id="_HylzkLq0Eei-o9NGTE6rmw" selectedViews="_RTBoALq0Eei-o9NGTE6rmw" version="13.0.0.201804031646">
     <semanticResources>SCGAE.frameweb</semanticResources>
     <semanticResources>JAVA.frameweb</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" xmi:id="_RTBoALq0Eei-o9NGTE6rmw">
@@ -1970,9 +1970,9 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/br.ufes.inf.nemo.FrameWeb_Martins2015.design/description/FrameWeb.odesign#//@ownedViewpoints[name='']/@ownedRepresentations[name='FrameWebPersistenceModel']/@defaultLayer/@containerMappings[name='PersistencePackage']/@subNodeMappings[name='DAOInterface']"/>
       </ownedDiagramElements>
-      <ownedDiagramElements xmi:type="diagram:DNode" xmi:id="_Ss1dULrlEei-o9NGTE6rmw" name="Interface DAO" incomingEdges="_Tx4Z0LrlEei-o9NGTE6rmw" width="3" height="3">
-        <target xmi:type="frameweb:DAOInterface" href="SCGAE.frameweb#//@compose.1/Persistence%20Package/Interface%20DAO"/>
-        <semanticElements xmi:type="frameweb:DAOInterface" href="SCGAE.frameweb#//@compose.1/Persistence%20Package/Interface%20DAO"/>
+      <ownedDiagramElements xmi:type="diagram:DNode" xmi:id="_Ss1dULrlEei-o9NGTE6rmw" name="DiaLetivoDAO" incomingEdges="_Tx4Z0LrlEei-o9NGTE6rmw" width="3" height="3">
+        <target xmi:type="frameweb:DAOInterface" href="SCGAE.frameweb#//@compose.1/Persistence%20Package/DiaLetivoDAO"/>
+        <semanticElements xmi:type="frameweb:DAOInterface" href="SCGAE.frameweb#//@compose.1/Persistence%20Package/DiaLetivoDAO"/>
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
         <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
         <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
