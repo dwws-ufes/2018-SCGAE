@@ -16,3 +16,7 @@ Route::redirect('/', '/home', 301);
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/aluno/create', 'AlunoController@create')->name('aluno.create');
+
+Route::post('/aluno/store', 'AlunoController@store')->name('aluno.store');
