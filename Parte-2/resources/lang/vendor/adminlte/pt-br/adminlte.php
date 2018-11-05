@@ -26,4 +26,6 @@ return [
    'auxilio_alimentacao' => 'Auxílio Alimentação',
    'auxilio_transporte' => 'Auxilio Transporte',
    'cpf' => 'CPF',
+   'cnpj' => 'CNPJ',
+   'refresh' => 'Atualizar'
 ];

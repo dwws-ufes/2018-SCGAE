@@ -1,0 +1,42 @@
+Instalação no Windows:
+
+1) Clone a aplicação do github
+
+2) Aponte o XAMPP para a pasta "Parte-2\public":
+	a) Abra o arquivo <<PATH_XAMPP>>\amache\conf\extra\httpd-vhosts.conf
+	b) Adicione um host como a seguir:
+
+		<VirtualHost *:80>
+		    DocumentRoot "<<PATH_PROJETO>>\Parte-2\public"
+		    ServerName scgae.localhost
+		    <Directory "<<PATH_PROJETO>>\Parte-2\public">
+		        Options Indexes FollowSymLinks MultiViews
+		        AllowOverride All
+		        Order allow,deny
+		        allow from all
+		        Require all granted
+		    </Directory>
+		</VirtualHost>
+
+3) Adicione o host ao arquivo de Hosts do Windows:
+	a) Abra o arquivo "C:\Windows\System32\drivers\etc\hosts"
+	b) Adicione a linha a seguir ao final do arquivo:
+		127.0.0.1 scgae.localhost #scgae
+
+4) Reinicie o Apache pelo painel do Xampp
+
+5) Renomeie o arquivo "<<PATH_PROJETO>>\Parte-2\.env.exemple" para "<<PATH_PROJETO>>\Parte-2\.env"
+
+6) Edite o arquivo copiado:
+	a) Mude o parâmetro "APP_URL" para "scgae.localhost"
+	b) Insira os dados do banco "DB_CONNECTION", "DB_HOST", "DB_PORT", "DB_DATABASE", "DB_USERNAME", "DB_PASSWORD".
+
+7) [SOMENTE PARA WINDOWS] Edite o arquivo "<<PATH_PROJETO>>\Parte-2\app\Providers\AppServiceProvider.php"
+	a) adicione "use Illuminate\Support\Facades\Schema;"
+	b) adicione a seguinte chamada de fuñção ao método boot(): "Schema::defaultStringLength(191);"
+
+8) Abra o Console na pasta "<<PATH_PROJETO>>\PArte-2" e rode os seguintes comandos:
+	a) composer install
+	b) php artisan key:generate
+	c) php artisan migrate:install
+	d) php artisan migrate

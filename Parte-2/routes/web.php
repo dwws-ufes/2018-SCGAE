@@ -18,5 +18,16 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/aluno/create', 'AlunoController@create')->name('aluno.create');
-
 Route::post('/aluno/store', 'AlunoController@store')->name('aluno.store');
+Route::get('/aluno/list', 'AlunoController@list')->name('aluno.list');
+
+Route::get('aluno/{aluno}',  ['as' => 'aluno.edit', 'uses' => 'AlunoController@edit']);
+Route::post('aluno/update/{aluno}', 'AlunoController@update')->name('aluno.update');
+// Route::patch('aluno/{aluno}/update',  ['as' => 'aluno.update', 'uses' => 'AlunoController@update']);
+
+
+Route::get('/escola/create', 'EscolaController@create')->name('escola.create');
+Route::post('/escola/store', 'EscolaController@store')->name('escola.store');
+
+Route::get('/restaurante/create', 'RestauranteController@create')->name('restaurante.create');
+Route::post('/restaurante/store', 'RestauranteController@store')->name('restaurante.store');
