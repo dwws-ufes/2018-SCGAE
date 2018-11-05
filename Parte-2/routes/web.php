@@ -26,6 +26,12 @@ Route::post('aluno/update/{aluno}', 'AlunoController@update')->name('aluno.updat
 // Route::patch('aluno/{aluno}/update',  ['as' => 'aluno.update', 'uses' => 'AlunoController@update']);
 
 
+Route::get('/refeicao/create', 'RefeicaoController@create')->name('refeicao.create');
+Route::post('/refeicao/store', 'RefeicaoController@store')->name('refeicao.store');
+Route::get('/refeicao/list', 'RefeicaoController@list')->name('refeicao.list');
+Route::get('refeicao/{refeicao}',  ['as' => 'refeicao.edit', 'uses' => 'RefeicaoController@edit']);
+Route::post('refeicao/update/{refeicao}', 'RefeicaoController@update')->name('refeicao.update');
+
 Route::get('/escola/create', 'EscolaController@create')->name('escola.create');
 Route::post('/escola/store', 'EscolaController@store')->name('escola.store');
 

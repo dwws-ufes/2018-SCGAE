@@ -139,7 +139,7 @@ class AlunoController extends Controller
         $user = User::find($aluno['user_id']);
         
         $user['name'] = $data['name'];
-        $user->save();
+        $user->update();
 
         
         $aluno['telefone'] = $data['telefone'];

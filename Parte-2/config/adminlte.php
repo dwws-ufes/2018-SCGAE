@@ -131,6 +131,17 @@ return [
             'url'  => 'restaurante/create',
             // 'can'  => 'manage-blog',
         ],
+        'AÇÕES PARA REFEIÇÃO',
+        [
+            'text' => 'Criar Refeição',
+            'url'  => 'refeicao/create',
+            // 'can'  => 'manage-blog',
+        ],
+        [
+            'text' => 'Listar Refeições',
+            'url'  => 'refeicao/list',
+            // 'can'  => 'manage-blog',
+        ],
         // [
         //     'text'        => 'Pages',
         //     'url'         => 'admin/pages',
