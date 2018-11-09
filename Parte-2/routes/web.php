@@ -37,6 +37,10 @@ Route::post('/cupomalimentacao/store', 'CupomAlimentacaoController@store')->name
 Route::get('/cupomalimentacao/today', 'CupomAlimentacaoController@today')->name('cupomalimentacao.today');
 Route::get('cupomalimentacao/print/{cupomalimentacao}',  ['as' => 'cupomalimentacao.show', 'uses' => 'CupomAlimentacaoController@show']);
 
+Route::get('/cupomalimentacao/validate', 'CupomAlimentacaoController@validateView')->name('cupomalimentacao.validate');
+Route::post('/cupomalimentacao/validate', 'CupomAlimentacaoController@validateView')->name('cupomalimentacao.validate');
+Route::post('/cupomalimentacao/dovalidate', 'CupomAlimentacaoController@doVAlidate')->name('cupomalimentacao.dovalidate');
+
 
 // Route::get('cupomalimentacao/edit/{idCupom}',  ['as' => 'cupomalimentacao.edit', 'uses' => 'CupomAlimentacaoController@edit']);
 

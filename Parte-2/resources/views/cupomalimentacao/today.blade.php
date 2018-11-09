@@ -7,9 +7,6 @@
 @stop
 
 @section('content')
-
-{{ $refeicaos }}
-    
     
     <section class="content">
       <div class="row">
@@ -73,14 +70,21 @@
                               <?php
 
                             }else{
-                              ?>
-                                <a href="/cupomalimentacao/print/{{ $refeicao->id_cupom }}">Imprimir</a>
-                              <?php
+                              if($refeicao->horario_utilizacao == null){
+                                ?>
+
+                                  <a href="/cupomalimentacao/print/{{ $refeicao->id_cupom }}">Imprimir</a>
+                                <?php
+
+                              }else{
+
+                                ?>
+                                  Não há ação
+                                <?php
                               
-                            }
-                              ?>
-                               
-                              <?php
+                              
+                              }
+                            } 
                             }else{
                               ?>
                               Tempo de emissão encerrado
@@ -88,12 +92,6 @@
                             }
 
                             ?>
-
-                          
-
-
-
-                          
 
                         </td>
                         

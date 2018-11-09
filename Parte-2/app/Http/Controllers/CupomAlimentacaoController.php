@@ -100,6 +100,37 @@ class CupomAlimentacaoController extends Controller
         return view('cupomalimentacao.print', compact('cupomAlimentacao', 'aluno', 'refeicao', 'user'));
     }
 
+
+    public function validateView(Request $request){
+        $data = $request->all();
+        // dd($data);
+        if(empty($data)){
+            return view('cupomalimentacao.validate');
+        }
+        // dd($data);
+
+        $cupomAlimentacao = CupomAlimentacao::find($data['cupomalimentacao_id']);
+        $aluno = CupomAlimentacao::find($cupomAlimentacao['id'])->aluno;
+        $user = Aluno::find($aluno['id'])->user;
+        $refeicao = CupomAlimentacao::find($cupomAlimentacao['id'])->refeicao;
+
+        // dd($cupomAlimentacao, $aluno, $user, $refeicao);
+
+        return view('cupomalimentacao.validate', compact('cupomAlimentacao', 'aluno', 'user', 'refeicao'));
+    }
+
+    public function doValidate(Request $request){
+        $data = $request->all();
+
+        $cupomAlimentacao = CupomAlimentacao::find($data['cupomalimentacao_id']);
+        $cupomAlimentacao['horario_utilizacao'] = Date('Y-m-d H:m:s');
+        $cupomAlimentacao->update();
+
+        return redirect()->route('cupomalimentacao.validate', $request);
+        
+        
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
