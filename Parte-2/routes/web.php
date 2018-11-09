@@ -32,6 +32,16 @@ Route::get('/refeicao/list', 'RefeicaoController@list')->name('refeicao.list');
 Route::get('refeicao/{refeicao}',  ['as' => 'refeicao.edit', 'uses' => 'RefeicaoController@edit']);
 Route::post('refeicao/update/{refeicao}', 'RefeicaoController@update')->name('refeicao.update');
 
+
+Route::post('/cupomalimentacao/store', 'CupomAlimentacaoController@store')->name('cupomalimentacao.store');
+Route::get('/cupomalimentacao/today', 'CupomAlimentacaoController@today')->name('cupomalimentacao.today');
+Route::get('cupomalimentacao/print/{cupomalimentacao}',  ['as' => 'cupomalimentacao.show', 'uses' => 'CupomAlimentacaoController@show']);
+
+
+// Route::get('cupomalimentacao/edit/{idCupom}',  ['as' => 'cupomalimentacao.edit', 'uses' => 'CupomAlimentacaoController@edit']);
+
+
+
 Route::get('/escola/create', 'EscolaController@create')->name('escola.create');
 Route::post('/escola/store', 'EscolaController@store')->name('escola.store');
 

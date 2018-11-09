@@ -38,8 +38,6 @@ class RefeicaoController extends Controller
     {
         //
         $data = $request->all();
-
-        // dd($data);
         
         $refeicao = Refeicao::create([
             'name' => $data['name'],
@@ -79,6 +77,7 @@ class RefeicaoController extends Controller
     public function edit(Refeicao $refeicao)
     {
         //
+        // dd($refeicao);
         
         return view('refeicao.edit', compact('refeicao'));
     }
@@ -96,8 +95,8 @@ class RefeicaoController extends Controller
         $data = $request->all();
         $refeicao['name'] = $data['name'];
         $refeicao['valor'] = $data['valor'];
-        $refeicao['inicio'] = isset($data['inicio']);
-        $refeicao['termino'] = isset($data['termino']);
+        $refeicao['inicio'] = $data['inicio'];
+        $refeicao['termino'] = $data['termino'];
         $refeicao->update();
         
         return redirect()->route('refeicao.list');

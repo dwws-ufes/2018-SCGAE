@@ -21,4 +21,12 @@ class Refeicao extends Model
         'inicio',
         'termino'
     ];
+
+    /**
+     * Get the cupomalimentacaos for the aluno.
+     */
+    // public function cupomalimentacao()
+    // {
+    //     return $this->hasMany('App\CupomAlimentacao');
+    // }
 }

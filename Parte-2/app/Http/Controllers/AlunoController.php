@@ -113,8 +113,6 @@ class AlunoController extends Controller
      */
     public function edit(Aluno $aluno)
     {
-        // $aluno = $aluno->leftJoin('users','alunos.user_id', '=' , 'users.id')->get();
-        // dd($aluno);
 
         $user = User::find($aluno['user_id']);
         

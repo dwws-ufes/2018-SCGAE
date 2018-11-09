@@ -142,6 +142,22 @@ return [
             'url'  => 'refeicao/list',
             // 'can'  => 'manage-blog',
         ],
+        'AÇÕES PARA CUPOM ALIMENTAÇÃO',
+        [
+            'text' => 'Cupons do dia',
+            'url'  => 'cupomalimentacao/today',
+            // 'can'  => 'manage-blog',
+        ],
+        [
+            'text' => 'Listar Cupons',
+            'url'  => 'cupomalimentacao/list',
+            // 'can'  => 'manage-blog',
+        ],
+        [
+            'text' => 'Validar Cupom',
+            'url'  => 'cupomalimentacao/validate',
+            // 'can'  => 'manage-blog',
+        ],
         // [
         //     'text'        => 'Pages',
         //     'url'         => 'admin/pages',

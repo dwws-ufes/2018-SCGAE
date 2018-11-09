@@ -1,3 +1,8 @@
+Instalar via composer:
+
+1) Classe para gerar código de barras:
+composer require picqer/php-barcode-generator
+
 Instalação no Windows:
 
 1) Clone a aplicação do github
