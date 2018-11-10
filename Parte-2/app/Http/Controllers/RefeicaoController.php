@@ -14,7 +14,9 @@ class RefeicaoController extends Controller
      */
     public function index()
     {
-        //
+        $refeicaos = Refeicao::all();
+
+        return view('refeicao.index', compact('refeicaos'));
     }
 
     /**
@@ -38,7 +40,7 @@ class RefeicaoController extends Controller
     {
         //
         $data = $request->all();
-        
+
         $refeicao = Refeicao::create([
             'name' => $data['name'],
             'valor' => $data['valor'],
@@ -49,12 +51,8 @@ class RefeicaoController extends Controller
         return view('/home');
     }
 
-    public function list(){
-
-        $refeicaos = Refeicao::all();
-
-        // return $alunos;
-        return view('refeicao.list', compact('refeicaos'));
+    public function list()
+    {
     }
 
     /**
@@ -78,7 +76,7 @@ class RefeicaoController extends Controller
     {
         //
         // dd($refeicao);
-        
+
         return view('refeicao.edit', compact('refeicao'));
     }
 
@@ -98,8 +96,8 @@ class RefeicaoController extends Controller
         $refeicao['inicio'] = $data['inicio'];
         $refeicao['termino'] = $data['termino'];
         $refeicao->update();
-        
-        return redirect()->route('refeicao.list');
+
+        return redirect()->route('refeicao.index');
     }
 
     /**

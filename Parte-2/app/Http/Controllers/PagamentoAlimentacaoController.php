@@ -7,7 +7,9 @@ use App\CupomAlimentacao;
 use App\Aluno;
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;;
+use Illuminate\Support\Facades\DB;
+
+;
 
 class PagamentoAlimentacaoController extends Controller
 {
@@ -18,7 +20,9 @@ class PagamentoAlimentacaoController extends Controller
      */
     public function index()
     {
-        //
+        $pagamentos = PagamentoAlimentacao::all();
+
+        return view('pagamentoalimentacao.index', compact('pagamentos'));
     }
 
     /**
@@ -30,23 +34,23 @@ class PagamentoAlimentacaoController extends Controller
     {
         //
         $pagamento = DB::table("pagamento_alimentacaos")
-                    ->where('data_pagamento','=', null)
+                    ->where('data_pagamento', '=', null)
                     ->get();
 
         $queryCupom = DB::table('cupom_alimentacaos')
-                        ->where('horario_utilizacao','!=',null)
-                        ->where('pagamento_alimentacao_id','=',null);
+                        ->where('horario_utilizacao', '!=', null)
+                        ->where('pagamento_alimentacao_id', '=', null);
 
-        if(sizeof($pagamento)==0){
+        if (sizeof($pagamento)==0) {
             $pagamento = PagamentoAlimentacao::create([]);
-        }else{
+        } else {
             $pagamento = $pagamento->first();
-            $queryCupom->orWhere('pagamento_alimentacao_id','=',$pagamento->id);
+            $queryCupom->orWhere('pagamento_alimentacao_id', '=', $pagamento->id);
         }
 
-        $queryCupom->leftJoin('alunos','alunos.id','=','cupom_alimentacaos.aluno_id')
-                    ->leftJoin('users','users.id','=','alunos.user_id')
-                    ->leftJoin('refeicaos','refeicaos.id','=','cupom_alimentacaos.refeicao_id');
+        $queryCupom->leftJoin('alunos', 'alunos.id', '=', 'cupom_alimentacaos.aluno_id')
+                    ->leftJoin('users', 'users.id', '=', 'alunos.user_id')
+                    ->leftJoin('refeicaos', 'refeicaos.id', '=', 'cupom_alimentacaos.refeicao_id');
 
         $cupomalimentacaos = $queryCupom->get([
                             'cupom_alimentacaos.id as cupom_id',
@@ -58,50 +62,41 @@ class PagamentoAlimentacaoController extends Controller
                             'users.name as aluno_name'
                             ]);
 
-        return view('pagamentoalimentacao.create',compact('pagamento','cupomalimentacaos'));
+        return view('pagamentoalimentacao.create', compact('pagamento', 'cupomalimentacaos'));
     }
 
 
-    public function setPagamento(Request $request){
-
+    public function setPagamento(Request $request)
+    {
         $data = $request->all();
         $cupom =  CupomAlimentacao::find($data['cupom_id']);
         $pagamento = PagamentoAlimentacao::find($data['pagamento_id']);
 
 
-        
-        if($data['action']=='incluir'){
+
+        if ($data['action']=='incluir') {
             $cupom['pagamento_alimentacao_id']=$data['pagamento_id'];
             $pagamento['valor']+=$data['refeicao_valor'];
-
-        }else{
+        } else {
             $cupom['pagamento_alimentacao_id']=null;
             $pagamento['valor']-=$data['refeicao_valor'];
-
         }
         $cupom->update();
         $pagamento->update();
         return redirect()->route('pagamentoalimentacao.create');
     }
 
-    function doPayment(Request $request){
-
+    public function doPayment(Request $request)
+    {
         $data = $request->all();
         $pagamento = PagamentoAlimentacao::find($data['pagamento_id']);
         $pagamento['data_pagamento'] = Date('Y-m-d H-i-s');
         $pagamento->update();
 
-        return redirect()->route('pagamentoalimentacao.list');
+        return redirect()->route('pagamentoalimentacao.index');
     }
 
 
-    function list(){
-
-        $pagamentos = PagamentoAlimentacao::all();
-
-        // return $alunos;
-        return view('pagamentoalimentacao.list', compact('pagamentos'));
-    }
     /**
      * Store a newly created resource in storage.
      *

@@ -19,7 +19,12 @@ class AlunoController extends Controller
      */
     public function index()
     {
-        //
+        $alunos = DB::table('users')
+            ->join('alunos', 'alunos.user_id', '=', 'users.id')
+            ->get();
+
+        // return $alunos;
+        return view('aluno.index', compact('alunos'));
     }
 
     /**
@@ -62,7 +67,7 @@ class AlunoController extends Controller
         $data = $request->all();
 
         $this->validator($data)->validate();
-        
+
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -83,15 +88,6 @@ class AlunoController extends Controller
         return route('home');
     }
 
-    public function list(){
-
-        $alunos = DB::table('users')
-                    ->join('alunos','alunos.user_id', '=' , 'users.id')
-                    ->get();
-
-        // return $alunos;
-        return view('aluno.list', compact('alunos'));
-    }
 
     /**
      * Display the specified resource.
@@ -114,9 +110,8 @@ class AlunoController extends Controller
      */
     public function edit(Aluno $aluno)
     {
-
         $user = User::find($aluno['user_id']);
-        
+
         return view('aluno.edit', compact('aluno', 'user'));
     }
 
@@ -136,11 +131,11 @@ class AlunoController extends Controller
         // $this->validator($data)->validate();
 
         $user = User::find($aluno['user_id']);
-        
+
         $user['name'] = $data['name'];
         $user->update();
 
-        
+
         $aluno['telefone'] = $data['telefone'];
         $aluno['matricula'] = $data['matricula'];
         $aluno['cpf'] = $data['cpf'];
@@ -148,8 +143,8 @@ class AlunoController extends Controller
         $aluno['auxilioAlimentacao'] = isset($data['auxilioAlimentacao']);
         $aluno['auxilioTransporte'] = isset($data['auxilioTransporte']);
         $aluno->update();
-        
-        return redirect()->route('aluno.list');
+
+        return redirect()->route('aluno.index');
     }
 
     /**

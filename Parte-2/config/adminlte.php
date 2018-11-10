@@ -116,7 +116,7 @@ return [
         ],
         [
             'text' => 'Listar Alunos',
-            'url'  => 'aluno/list',
+            'url'  => 'aluno',
             // 'can'  => 'manage-blog',
         ],
         'AÇÕES PARA ESCOLA',
@@ -139,7 +139,7 @@ return [
         ],
         [
             'text' => 'Listar Refeições',
-            'url'  => 'refeicao/list',
+            'url'  => 'refeicao',
             // 'can'  => 'manage-blog',
         ],
         'AÇÕES PARA CUPOM ALIMENTAÇÃO',
@@ -161,7 +161,7 @@ return [
         ],
         [
             'text' => 'Listar Pagamentos Alimentação',
-            'url'  => 'pagamentoalimentacao/list',
+            'url'  => 'pagamentoalimentacao',
             // 'can'  => 'manage-blog',
         ],
 

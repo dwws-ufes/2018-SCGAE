@@ -17,25 +17,28 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/aluno/create', 'AlunoController@create')->name('aluno.create');
-Route::post('/aluno/store', 'AlunoController@store')->name('aluno.store');
-Route::get('/aluno/list', 'AlunoController@list')->name('aluno.list');
+// Route::prefix('aluno')->group(function () {
+//     Route::name('aluno.')->group(function () {
+//         Route::get('create', 'AlunoController@create')->name('create');
+//         Route::post('store', 'AlunoController@store')->name('store');
+//         Route::get('list', 'AlunoController@list')->name('list');
+//         Route::get('{aluno}', 'AlunoController@edit')->name('edit');
+//         Route::post('update/{aluno}', 'AlunoController@update')->name('update');
+//     });
+// });
 
-Route::get('aluno/{aluno}',  ['as' => 'aluno.edit', 'uses' => 'AlunoController@edit']);
-Route::post('aluno/update/{aluno}', 'AlunoController@update')->name('aluno.update');
-// Route::patch('aluno/{aluno}/update',  ['as' => 'aluno.update', 'uses' => 'AlunoController@update']);
+Route::resource('aluno', 'AlunoController');
 
+Route::resource('refeicao', 'RefeicaoController');
 
-Route::get('/refeicao/create', 'RefeicaoController@create')->name('refeicao.create');
-Route::post('/refeicao/store', 'RefeicaoController@store')->name('refeicao.store');
-Route::get('/refeicao/list', 'RefeicaoController@list')->name('refeicao.list');
-Route::get('refeicao/{refeicao}',  ['as' => 'refeicao.edit', 'uses' => 'RefeicaoController@edit']);
-Route::post('refeicao/update/{refeicao}', 'RefeicaoController@update')->name('refeicao.update');
+Route::resource('escola', 'EscolaController');
+
+Route::resource('restaurante', 'RestauranteController');
 
 
 Route::post('/cupomalimentacao/store', 'CupomAlimentacaoController@store')->name('cupomalimentacao.store');
 Route::get('/cupomalimentacao/today', 'CupomAlimentacaoController@today')->name('cupomalimentacao.today');
-Route::get('cupomalimentacao/print/{cupomalimentacao}',  ['as' => 'cupomalimentacao.show', 'uses' => 'CupomAlimentacaoController@show']);
+Route::get('cupomalimentacao/print/{cupomalimentacao}', ['as' => 'cupomalimentacao.show', 'uses' => 'CupomAlimentacaoController@show']);
 
 Route::get('/cupomalimentacao/validate', 'CupomAlimentacaoController@validateView')->name('cupomalimentacao.validate');
 Route::post('/cupomalimentacao/validate', 'CupomAlimentacaoController@validateView')->name('cupomalimentacao.validate');
@@ -50,15 +53,3 @@ Route::post('/pagamentoalimentacao/create', 'PagamentoAlimentacaoController@setP
 
 Route::get('/relatorio/meuscupons', 'CupomAlimentacaoController@reportMeusCupons')->name('relatorio.meuscupons');
 Route::post('/relatorio/meuscupons', 'CupomAlimentacaoController@reportMeusCupons')->name('relatorio.meuscupons');
-
-
-
-
-
-
-
-Route::get('/escola/create', 'EscolaController@create')->name('escola.create');
-Route::post('/escola/store', 'EscolaController@store')->name('escola.store');
-
-Route::get('/restaurante/create', 'RestauranteController@create')->name('restaurante.create');
-Route::post('/restaurante/store', 'RestauranteController@store')->name('restaurante.store');

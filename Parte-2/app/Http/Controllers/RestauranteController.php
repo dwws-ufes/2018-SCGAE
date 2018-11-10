@@ -46,7 +46,7 @@ class RestauranteController extends Controller
     public function store(RestauranteStoreRequest $request)
     {
         $data = $request->all();
-        
+
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
