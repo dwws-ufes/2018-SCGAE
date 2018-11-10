@@ -27,6 +27,6 @@ class PagamentoAlimentacao extends Model
      */
     public function cupomalimentacao()
     {
-        return $this->belongsTo('App\CupomAlimentacao');
+        return $this->hasMany('App\CupomAlimentacao');
     }
 }

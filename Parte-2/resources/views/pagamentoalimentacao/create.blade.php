@@ -18,6 +18,7 @@
               <form method="post" action="<?php echo route('pagamentoalimentacao.setpagamento'); ?>" style="float:right;">
                 {!! csrf_field() !!}
                 <input type="text" name="pagamento_id" value="{{ $pagamento->id }}" style="display: none;">
+                <input type="text" name="action" value="pagar" style="display: none;">
                 <button type="submit">Pagar Agora</button>
               </form>
 

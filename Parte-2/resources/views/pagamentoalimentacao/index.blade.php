@@ -8,7 +8,7 @@
 
 @section('content')
 
-    
+
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
@@ -28,7 +28,7 @@
                 </tr>
                 {{-- </thead> --}}
                 {{-- <tbody> --}}
-            
+
                 @foreach($pagamentos as $pagamento)
                     <tr>
                         <td> {{ $pagamento->id }} </td>
@@ -43,15 +43,19 @@
                         </td>
                         <td>
                           <?php if($pagamento->data_pagamento==null){
-                            echo 'Ir para tela de criação deste pagamento';
+                            ?>
+                              <a href="pagamentoalimentacao/create">Ir para este pagamento</a>
+                            <?php
                           }else{
-                            echo "Ver cupons deste pagamento";
+                            ?>
+                              <a href="{{ $pagamento->id }}">Ver detalhes</a>
+                            <?php
                           }
                           ?>
                         </td>
                     </tr>
-                    
-                    
+
+
 
                 @endforeach
 

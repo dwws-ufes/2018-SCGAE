@@ -14,7 +14,7 @@
         <h2>{{ $refeicao['name'] }}</h2>
         <h3>Aluno: {{ $user['name'] }}</h3>
         <h3>Matrícula: {{ $aluno['matricula'] }}</h3>
-        <h4> Código para validação do cupom: {{ $cupomAlimentacao['id'] }} </h4>
+        <h4> Código para validação do cupom: {{ $cupomalimentacao['id'] }} </h4>
         <?php
         	//$generator = new Picqer\Barcode\BarcodeGeneratorHTML();
 			//echo $generator->getBarcode(intval($cupomAlimentacao['id']), $generator::TYPE_CODE_128);

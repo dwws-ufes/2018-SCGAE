@@ -38,7 +38,7 @@ Route::post('/cupomalimentacao/dovalidate', 'CupomAlimentacaoController@doValida
 Route::get('/pagamentoalimentacao/create', 'PagamentoAlimentacaoController@create')->name('pagamentoalimentacao.create');
 Route::get('/pagamentoalimentacao/list', 'PagamentoAlimentacaoController@list')->name('pagamentoalimentacao.list');
 Route::post('/pagamentoalimentacao/create', 'PagamentoAlimentacaoController@setPagamento')->name('pagamentoalimentacao.setpagamento');
-// Route::post('/pagamentoalimentacao/create', 'PagamentoAlimentacaoController@doPayment')->name('pagamentoalimentacao.dopayment');
+Route::get('pagamentoalimentacao/{pagamentoalimentacao}',  ['as' => 'pagamentoalimentacao.show', 'uses' => 'PagamentoAlimentacaoController@show']);
 
 
 Route::get('/relatorio/meuscupons', 'CupomAlimentacaoController@reportMeusCupons')->name('relatorio.meuscupons');
