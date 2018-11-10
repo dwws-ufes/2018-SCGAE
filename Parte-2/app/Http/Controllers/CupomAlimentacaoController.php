@@ -131,6 +131,15 @@ class CupomAlimentacaoController extends Controller
         
     }
 
+    public function reportMeusCupons(Request $request){
+        $data = $request->all();
+        // dd($data);
+        if(empty($data)){
+            return view('relatorio.meuscupons');
+        }
+
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

@@ -80,6 +80,7 @@ class AlunoController extends Controller
         ]);
 
         // dd($user, $aluno);
+        return route('home');
     }
 
     public function list(){

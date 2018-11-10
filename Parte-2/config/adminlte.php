@@ -149,15 +149,36 @@ return [
             // 'can'  => 'manage-blog',
         ],
         [
-            'text' => 'Listar Cupons',
-            'url'  => 'cupomalimentacao/list',
-            // 'can'  => 'manage-blog',
-        ],
-        [
             'text' => 'Validar Cupom',
             'url'  => 'cupomalimentacao/validate',
             // 'can'  => 'manage-blog',
         ],
+        'AÇÕES PARA PAGAMENTOS',
+        [
+            'text' => 'Criar Pagamento Alimentação',
+            'url'  => 'pagamentoalimentacao/create',
+            // 'can'  => 'manage-blog',
+        ],
+        [
+            'text' => 'Listar Pagamentos Alimentação',
+            'url'  => 'pagamentoalimentacao/list',
+            // 'can'  => 'manage-blog',
+        ],
+
+        'RELATÓRIOS',
+        [
+            'text' => 'Meus cupons',
+            'url'  => 'relatorio/meuscupons',
+        ],
+        [
+            'text' => 'Cupons Validados',
+            'url'  => 'b',
+        ],
+        [
+            'text' => 'Pagamentos',
+            'url'  => 'c',
+        ],
+
         // [
         //     'text'        => 'Pages',
         //     'url'         => 'admin/pages',

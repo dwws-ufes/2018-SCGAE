@@ -18,7 +18,8 @@ class CupomAlimentacao extends Model
      */
     protected $fillable = [
         'refeicao_id',
-        'aluno_id'
+        'aluno_id',
+        'pagamento_alimentacao_id'
     ];
     
     /**

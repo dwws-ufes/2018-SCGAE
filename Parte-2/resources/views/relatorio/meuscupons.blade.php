@@ -1,34 +1,38 @@
 @extends('adminlte::page')
 
-@section('title', 'Lista de Alunos')
+@section('title', 'Home')
 
 @section('content_header')
-    <h1>Lista de Alunos Cadastados</h1>
+    <h1>Meus cupons</h1>
 @stop
 
 @section('content')
 
-    
+    <div>
+        <form method="post" action="<?php echo route('relatorio.meuscupons'); ?>">
+            {!! csrf_field() !!}
+            <span>Data início</span><input type="text" name="data_inicio" />
+            <span>Data fim</span><input type="text" name="data_fim" />
+
+            
+            <button type="submit">Gerar</button>
+        </form>
+    </div>
+
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Tabela de refeicoes registradas</h3>
+              <h3 class="box-title">Tabela de cupons emitidos entre --- e ---</h3>
             </div>
-            <!-- /.box-header -->
             <div class="box-body">
               <table class="table table-bordered table-hover">
-                {{-- <thead> --}}
                 <tr>
-                  <th>Nome</th>
-                  <th>Valor</th>
-                  <th>Inicio</th>
-                  <th>Termino</th>
-                  <th>Ações</th>
+                  <th>Data</th>
+                  <th>Refeicao</th>
+                  <th>Status</th>
                 </tr>
-                {{-- </thead> --}}
-                {{-- <tbody> --}}
             
                 @foreach($refeicaos as $refeicao)
                     <tr>
@@ -49,4 +53,5 @@
         </div>
       </div>
     </section>
+    
 @stop
