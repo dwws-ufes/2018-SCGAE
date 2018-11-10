@@ -86,18 +86,16 @@ class CupomAlimentacaoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\CupomAlimentacao  $cupomAlimentacao
+     * @param  \App\CupomAlimentacao  $cupomalimentacao
      * @return \Illuminate\Http\Response
      */
-    public function show(int $cupomAlimentacaoId)
+    public function show(CupomAlimentacao $cupomalimentacao)
     {
-        // dd($cupomAlimentacaoId);
-        $cupomAlimentacao = CupomAlimentacao::find($cupomAlimentacaoId);
-        $aluno = CupomAlimentacao::find($cupomAlimentacao['id'])->aluno;
+        $aluno = CupomAlimentacao::find($cupomalimentacao['id'])->aluno;
         $user = Aluno::find($aluno['id'])->user;
-        $refeicao = CupomAlimentacao::find($cupomAlimentacao['id'])->refeicao;
+        $refeicao = CupomAlimentacao::find($cupomalimentacao['id'])->refeicao;
 
-        return view('cupomalimentacao.print', compact('cupomAlimentacao', 'aluno', 'refeicao', 'user'));
+        return view('cupomalimentacao.print', compact('cupomalimentacao', 'aluno', 'refeicao', 'user'));
     }
 
 

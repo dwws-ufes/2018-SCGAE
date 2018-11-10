@@ -65,10 +65,16 @@ class PagamentoAlimentacaoController extends Controller
     public function setPagamento(Request $request){
 
         $data = $request->all();
-        $cupom =  CupomAlimentacao::find($data['cupom_id']);
         $pagamento = PagamentoAlimentacao::find($data['pagamento_id']);
 
+        if($data['action']=='pagar'){
+            $pagamento['data_pagamento'] = Date('Y-m-d H-i-s');
+            $pagamento->update();
 
+            return redirect()->route('pagamentoalimentacao.list');
+        }
+
+        $cupom =  CupomAlimentacao::find($data['cupom_id']);
         
         if($data['action']=='incluir'){
             $cupom['pagamento_alimentacao_id']=$data['pagamento_id'];
@@ -82,16 +88,6 @@ class PagamentoAlimentacaoController extends Controller
         $cupom->update();
         $pagamento->update();
         return redirect()->route('pagamentoalimentacao.create');
-    }
-
-    function doPayment(Request $request){
-
-        $data = $request->all();
-        $pagamento = PagamentoAlimentacao::find($data['pagamento_id']);
-        $pagamento['data_pagamento'] = Date('Y-m-d H-i-s');
-        $pagamento->update();
-
-        return redirect()->route('pagamentoalimentacao.list');
     }
 
 
@@ -116,12 +112,32 @@ class PagamentoAlimentacaoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\PagamentoAlimentacao  $pagamentoAlimentacao
+     * @param  \App\PagamentoAlimentacao  $pagamentoalimentacao
      * @return \Illuminate\Http\Response
      */
-    public function show(PagamentoAlimentacao $pagamentoAlimentacao)
+    public function show(PagamentoAlimentacao $pagamentoalimentacao)
     {
-        //
+
+        // $cupomalimentacaos = PagamentoAlimentacao::find($pagamentoalimentacao['id'])->cupomalimentacao;
+
+        $queryCupom = DB::table('cupom_alimentacaos')
+                        ->where('pagamento_alimentacao_id','=',$pagamentoalimentacao['id'])
+                        ->leftJoin('alunos','alunos.id','=','cupom_alimentacaos.aluno_id')
+                        ->leftJoin('users','users.id','=','alunos.user_id')
+                        ->leftJoin('refeicaos','refeicaos.id','=','cupom_alimentacaos.refeicao_id');
+
+        $cupomalimentacaos = $queryCupom->get([
+                            'cupom_alimentacaos.id as cupom_id',
+                            'cupom_alimentacaos.created_at as cupom_data',
+                            'cupom_alimentacaos.pagamento_alimentacao_id',
+                            'alunos.matricula',
+                            'refeicaos.name as refeicao_name',
+                            'refeicaos.valor as refeicao_valor',
+                            'users.name as aluno_name'
+                            ]);
+
+        // dd($cupomalimentacaos);
+        return view('pagamentoalimentacao.show',compact('cupomalimentacaos', 'pagamentoalimentacao'));
     }
 
     /**

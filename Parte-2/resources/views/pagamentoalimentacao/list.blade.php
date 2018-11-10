@@ -43,9 +43,13 @@
                         </td>
                         <td>
                           <?php if($pagamento->data_pagamento==null){
-                            echo 'Ir para tela de criação deste pagamento';
+                            ?>
+                              <a href="pagamentoalimentacao/create">Ir para este pagamento</a>
+                            <?php
                           }else{
-                            echo "Ver cupons deste pagamento";
+                            ?>
+                              <a href="{{ $pagamento->id }}">Ver detalhes</a>
+                            <?php
                           }
                           ?>
                         </td>
