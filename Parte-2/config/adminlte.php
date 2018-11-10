@@ -125,6 +125,11 @@ return [
             'url'  => 'escola/create',
             // 'can'  => 'manage-blog',
         ],
+        [
+            'text' => 'Listar Escolas',
+            'url' => 'escola',
+            // 'can'  => 'manage-blog',
+        ],
         'AÇÕES PARA RESTAURANTE',
         [
             'text' => 'Criar Restaurante',

@@ -5,9 +5,8 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
-class Restaurante extends Model
+class Endereco extends Model
 {
-    //
     use Notifiable;
 
     /**
@@ -16,16 +15,13 @@ class Restaurante extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id',
-        'cnpj',
-        'telefone'
+        'logradouro',
+        'numero',
+        'complemento',
+        'cep',
+        'bairro',
+        'cidade',
+        'estado',
+        'pais',
     ];
-
-    /**
-     * The user associated with aluno
-     */
-    public function user()
-    {
-        return $this->hasOne('App\UserRestaurante', 'user_id');
-    }
 }

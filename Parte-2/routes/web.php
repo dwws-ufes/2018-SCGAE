@@ -17,16 +17,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-// Route::prefix('aluno')->group(function () {
-//     Route::name('aluno.')->group(function () {
-//         Route::get('create', 'AlunoController@create')->name('create');
-//         Route::post('store', 'AlunoController@store')->name('store');
-//         Route::get('list', 'AlunoController@list')->name('list');
-//         Route::get('{aluno}', 'AlunoController@edit')->name('edit');
-//         Route::post('update/{aluno}', 'AlunoController@update')->name('update');
-//     });
-// });
-
 Route::resource('aluno', 'AlunoController');
 
 Route::resource('refeicao', 'RefeicaoController');

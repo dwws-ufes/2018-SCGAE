@@ -18,6 +18,9 @@ class CreateEscolasTable extends Migration
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
 
+            $table->unsignedInteger('endereco_id');
+            $table->foreign('endereco_id')->references('id')->on('enderecos');
+
             $table->string('cnpj')->default('');
             $table->timestamps();
         });

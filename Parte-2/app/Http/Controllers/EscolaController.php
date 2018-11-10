@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests\EscolaStoreRequest;
 use App\User;
 use Illuminate\Support\Facades\Hash;
+use App\UserEscola;
+use App\EnderecoEscola;
+
 class EscolaController extends Controller
 {
     /**
@@ -16,7 +19,7 @@ class EscolaController extends Controller
      */
     public function index()
     {
-        //
+        return view('escola.index');
     }
 
     /**
@@ -36,22 +39,40 @@ class EscolaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RestauranteStoreRequest $request)
+    public function store(EscolaStoreRequest $request)
     {
         $data = $request->all();
-        
-        $user = User::create([
+
+        $user = new UserEscola([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
 
-        $escola = Escola::create([
-            'user_id' => $user['id'],
+        $user->save();
+
+        $endereco = new EnderecoEscola([
+            'logradouro' => $data['logradouro'],
+            'numero' => $data['numero'],
+            'complemento' => $data['complemento'],
+            'cep' => $data['cep'],
+            'bairro' => $data['bairro'],
+            'cidade' => $data['cidade'],
+            'estado' => $data['estado'],
+            'pais' => $data['pais'],
+        ]);
+
+        $endereco->save();
+
+        $escola = new Escola([
             'cnpj' => $data['cnpj']
         ]);
 
-        // dd($user, $aluno);
+        $escola->user()->associate($user);
+        $escola->endereco()->associate($endereco);
+        $escola->save();
+
+        return redirect()->route('escola.index');
     }
 
     /**

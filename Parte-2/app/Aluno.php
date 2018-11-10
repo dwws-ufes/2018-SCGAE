@@ -23,13 +23,29 @@ class Aluno extends Model
         'auxilioTransporte',
         'user_id'
     ];
-    
+
     /**
      * The user associated with aluno
      */
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\UserAluno', 'user_id');
+    }
+
+    /**
+     * The escola associated with aluno
+     */
+    public function escola()
+    {
+        return $this->belongsTo('App\Escola');
+    }
+
+    /**
+     * The endereco associated with aluno
+     */
+    public function endereco()
+    {
+        return $this->belongsTo('App\EnderecoAluno', 'endereco_id');
     }
 
     /**
@@ -39,5 +55,4 @@ class Aluno extends Model
     {
         return $this->hasMany('App\CupomAlimentacao');
     }
-
 }

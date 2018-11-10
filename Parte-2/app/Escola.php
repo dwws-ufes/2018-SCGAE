@@ -19,12 +19,28 @@ class Escola extends Model
         'user_id',
         'cnpj'
     ];
-    
+
     /**
-     * The user associated with aluno
+     * The user associated with escola
      */
     public function user()
     {
-        return $this->hasOne('App\User');
+        return $this->belongsTo('App\UserEscola', 'user_id');
+    }
+
+    /**
+     * The endereco associated with escola
+     */
+    public function endereco()
+    {
+        return $this->belongsTo('App\EnderecoEscola', 'endereco_id');
+    }
+
+    /**
+     * The alunos associated with escola
+     */
+    public function alunos()
+    {
+        return $this->hasMany('App\Aluno');
     }
 }

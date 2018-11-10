@@ -9,6 +9,9 @@ use App\Http\Requests\AlunoStoreRequest;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\UserAluno;
+use App\EnderecoAluno;
+use App\Escola;
 
 class AlunoController extends Controller
 {
@@ -66,16 +69,30 @@ class AlunoController extends Controller
     {
         $data = $request->all();
 
-        $this->validator($data)->validate();
-
-        $user = User::create([
+        $user = new UserAluno([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
 
-        $aluno = Aluno::create([
-            'user_id' => $user['id'],
+        $user->save();
+
+        $endereco = new EnderecoAluno([
+            'logradouro' => $data['logradouro'],
+            'numero' => $data['numero'],
+            'complemento' => $data['complemento'],
+            'cep' => $data['cep'],
+            'bairro' => $data['bairro'],
+            'cidade' => $data['cidade'],
+            'estado' => $data['estado'],
+            'pais' => $data['pais'],
+        ]);
+
+        $endereco->save();
+
+        $escola = Escola::firstOrFail();
+
+        $aluno = new Aluno([
             'telefone' => $data['telefone'],
             'matricula' => $data['matricula'],
             'cpf' => $data['cpf'],
@@ -84,8 +101,12 @@ class AlunoController extends Controller
             'auxilioTransporte' => isset($data['auxilioTransporte'])
         ]);
 
-        // dd($user, $aluno);
-        return route('home');
+        $aluno->escola()->associate($escola);
+        $aluno->endereco()->associate($endereco);
+        $aluno->user()->associate($user);
+        $aluno->save();
+
+        return redirect()->route('escola.index');
     }
 
 

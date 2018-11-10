@@ -18,6 +18,12 @@ class CreateAlunosTable extends Migration
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
 
+            $table->unsignedInteger('endereco_id');
+            $table->foreign('endereco_id')->references('id')->on('enderecos');
+
+            $table->unsignedInteger('escola_id');
+            $table->foreign('escola_id')->references('id')->on('escolas');
+
             $table->string('telefone')->default('');
             $table->string('matricula')->default('');
             $table->string('cpf')->default('');
