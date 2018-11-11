@@ -47,21 +47,23 @@ class RestauranteController extends Controller
     {
         $data = $request->all();
 
-        $user = User::create([
+        $user = new User([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
 
-        $restaurante = Restaurante::create([
-            'user_id' => $user['id'],
+        $user->save();
+
+        $restaurante = new Restaurante([
             'telefone' => $data['telefone'],
             'cnpj' => $data['cnpj']
         ]);
 
-        return view('/home');
+        $restaurante->user()->associate($user);
+        $restaurante->save();
 
-        // dd($user, $aluno);
+        return redirect()->route('restaurante.index');
     }
 
     /**

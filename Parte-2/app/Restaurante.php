@@ -26,6 +26,6 @@ class Restaurante extends Model
      */
     public function user()
     {
-        return $this->hasOne('App\UserRestaurante', 'user_id');
+        return $this->belongsTo('App\UserRestaurante', 'user_id');
     }
 }
