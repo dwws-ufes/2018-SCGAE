@@ -10,6 +10,25 @@
 
 
     <section class="content">
+      <div>
+        <?php
+
+        if($pagamentoAberto != null){
+          ?>
+            Você possui um pagamento em aberto.
+            <a href="/cupomalimentacao/listToPay/{{$pagamentoAberto->id}}">Ir para a tela de incluir cupons validados no pagamento</a>
+          <?php
+
+        }else{
+          ?>
+            Você não possui um pagamento em aberto.
+            <a href="/pagamentoalimentacao/create">Criar um pagamento</a>
+          <?php
+
+        }
+
+        ?>
+      </div>
       <div class="row">
         <div class="col-xs-12">
           <div class="box">

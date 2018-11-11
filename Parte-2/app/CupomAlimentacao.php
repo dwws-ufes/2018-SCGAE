@@ -37,4 +37,8 @@ class CupomAlimentacao extends Model
     {
         return $this->belongsTo('App\Refeicao');
     }
+
+    public function getCuponsValidados(){
+        
+    }
 }
