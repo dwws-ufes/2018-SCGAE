@@ -1,22 +1,21 @@
 @extends('layouts.list')
 
-@section('title', 'Lista de Refeições')
+@section('title', 'Lista de Restaurantes')
 
 @section('content_header')
-    <h1>Lista de Refeições Cadastados</h1>
+    <h1>Lista de Restaurantes Cadastados</h1>
 @stop
 
 @section('table_content')
     @include('partials.list-items', [
         'fields' => [
-            'name' => 'Nome',
-            'valor' => 'Valor',
-            'inicio' => 'Início',
-            'termino' => 'Término',
+            'user.name' => 'Nome',
+            'cnpj' => 'CNPJ',
+            'user.email' => 'Email',
         ],
-        'items' => $refeicaos,
+        'items' => $restaurantes,
         'acoes' => [
-            'refeicao.edit' => [
+            'restaurante.edit' => [
                 'params' => ['id'],
                 'link' => 'Editar'
             ]

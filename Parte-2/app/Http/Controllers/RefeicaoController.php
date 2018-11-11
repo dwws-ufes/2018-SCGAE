@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Refeicao;
 use Illuminate\Http\Request;
+use App\Repositories\Contracts\RefeicaoRepository;
 
 class RefeicaoController extends Controller
 {
+    private $refeicaos;
+
+    public function __construct(RefeicaoRepository $refeicaos)
+    {
+        $this->refeicaos = $refeicaos;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +22,7 @@ class RefeicaoController extends Controller
      */
     public function index()
     {
-        $refeicaos = Refeicao::all();
+        $refeicaos = $this->refeicaos->all();
 
         return view('refeicao.index', compact('refeicaos'));
     }

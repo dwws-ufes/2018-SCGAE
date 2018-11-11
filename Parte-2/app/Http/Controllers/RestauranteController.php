@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\RestauranteStoreRequest;
 use App\User;
 use Illuminate\Support\Facades\Hash;
+use App\Repositories\Contracts\RestauranteRepository;
+use Kurt\Repoist\Repositories\Eloquent\Criteria\EagerLoad;
 
 class RestauranteController extends Controller
 {
@@ -17,6 +19,13 @@ class RestauranteController extends Controller
      */
     // protected $redirectTo = '/home';
 
+    private $restaurantes;
+
+    public function __construct(RestauranteRepository $restaurantes)
+    {
+        $this->restaurantes = $restaurantes;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +33,11 @@ class RestauranteController extends Controller
      */
     public function index()
     {
-        //
+        $restaurantes = $this->restaurantes->withCriteria([
+            new EagerLoad(['user']),
+        ])->all();
+
+        return view('restaurante.index', compact('restaurantes'));
     }
 
     /**

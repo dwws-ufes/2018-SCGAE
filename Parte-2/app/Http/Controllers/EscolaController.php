@@ -9,9 +9,19 @@ use App\User;
 use Illuminate\Support\Facades\Hash;
 use App\UserEscola;
 use App\EnderecoEscola;
+use Illuminate\Support\Facades\DB;
+use App\Repositories\Contracts\EscolaRepository;
+use Kurt\Repoist\Repositories\Eloquent\Criteria\EagerLoad;
 
 class EscolaController extends Controller
 {
+    private $escolas;
+
+    public function __construct(EscolaRepository $escolas)
+    {
+        $this->escolas = $escolas;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +29,11 @@ class EscolaController extends Controller
      */
     public function index()
     {
-        return view('escola.index');
+        $escolas = $this->escolas->withCriteria([
+            new EagerLoad(['user']),
+        ])->all();
+
+        return view('escola.index', compact('escolas'));
     }
 
     /**

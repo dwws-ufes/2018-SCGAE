@@ -136,6 +136,11 @@ return [
             'url'  => 'restaurante/create',
             // 'can'  => 'manage-blog',
         ],
+        [
+            'text' => 'Listar Restaurantes',
+            'url' => 'restaurante',
+            // 'can'  => 'manage-blog',
+        ],
         'AÇÕES PARA REFEIÇÃO',
         [
             'text' => 'Criar Refeição',

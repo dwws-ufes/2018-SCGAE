@@ -12,9 +12,17 @@ use Illuminate\Support\Facades\Validator;
 use App\UserAluno;
 use App\EnderecoAluno;
 use App\Escola;
+use App\Repositories\Contracts\AlunoRepository;
+use Kurt\Repoist\Repositories\Eloquent\Criteria\EagerLoad;
 
 class AlunoController extends Controller
 {
+    private $alunos;
+
+    public function __construct(AlunoRepository $alunos)
+    {
+        $this->alunos = $alunos;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -22,11 +30,10 @@ class AlunoController extends Controller
      */
     public function index()
     {
-        $alunos = DB::table('users')
-            ->join('alunos', 'alunos.user_id', '=', 'users.id')
-            ->get();
+        $alunos = $this->alunos->withCriteria([
+            new EagerLoad(['user']),
+        ])->all();
 
-        // return $alunos;
         return view('aluno.index', compact('alunos'));
     }
 
