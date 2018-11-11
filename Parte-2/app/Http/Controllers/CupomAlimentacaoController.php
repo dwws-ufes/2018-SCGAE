@@ -156,7 +156,7 @@ class CupomAlimentacaoController extends Controller
                                     new EagerLoad(['refeicao']),
                                     new EagerLoad(['aluno.user']),
                                 ])
-                                ->findWhere('pagamento_alimentacao_id',null)
+                                ->findWhere('pagamentoalimentacao_id',null)
                                 ->where('horario_utilizacao','!=', null);
                                 
         // dd($cupomalimentacaos);
@@ -189,8 +189,10 @@ class CupomAlimentacaoController extends Controller
         $pagamentoalimentacao = PagamentoAlimentacao::find($data['pagamento_id']);
 
         $cupomalimentacao->pagamentoalimentacao()->associate($pagamentoalimentacao);
-        // $cupomalimentacao->save();
-        dd($data, $cupomalimentacao, $pagamentoalimentacao);
+        $cupomalimentacao->save();
+        $pagamentoalimentacao->somaValor($cupomalimentacao->refeicao->valor);
+        $pagamentoalimentacao->save();
+        return redirect()->route('cupomalimentacao.listtopay', ['pagamentoalimentacao' => $pagamentoalimentacao]); 
     }
 
     /**
