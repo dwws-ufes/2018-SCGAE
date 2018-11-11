@@ -22,8 +22,8 @@ class CreateCupomAlimentacaosTable extends Migration
             $table->unsignedInteger('aluno_id');
             $table->foreign('aluno_id')->references('id')->on('alunos');
 
-            $table->unsignedInteger('pagamento_alimentacao_id')->nullable()->default(null);
-            $table->foreign('pagamento_alimentacao_id')->references('id')->on('pagamento_alimentacaos');
+            $table->unsignedInteger('pagamentoalimentacao_id')->nullable()->default(null);
+            $table->foreign('pagamentoalimentacao_id')->references('id')->on('pagamento_alimentacaos');
             
             $table->time('horario_utilizacao')->nullable()->default(NULL);
 

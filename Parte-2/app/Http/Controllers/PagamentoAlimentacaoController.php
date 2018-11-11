@@ -54,32 +54,30 @@ class PagamentoAlimentacaoController extends Controller
 
         if (sizeof($pagamentoalimentacaos)==0) {
 
-            $pagamentoalimentacaos = PagamentoAlimentacao::create([]);
+            $pagamentoalimentacaos = $this->store();
 
         } else {
 
-            $pagamentoalimentacaos = $pagamentoalimentacaos->first();
+            // $pagamentoalimentacaos = $pagamentoalimentacaos->first();
 
-            $cupomalimentacaos = $pagamentoalimentacaos->cupomalimentacao;
-            // dd($cupomalimentacaos);
-
-            $queryCupom->orWhere('pagamento_alimentacao_id', '=', $pagamentoalimentacaos->id);
+            // $cupomalimentacaos = $pagamentoalimentacaos->cupomalimentacao;
+            // $queryCupom->orWhere('pagamento_alimentacao_id', '=', $pagamentoalimentacaos->id);
 
         }
 
-        $queryCupom->leftJoin('alunos', 'alunos.id', '=', 'cupom_alimentacaos.aluno_id')
-                    ->leftJoin('users', 'users.id', '=', 'alunos.user_id')
-                    ->leftJoin('refeicaos', 'refeicaos.id', '=', 'cupom_alimentacaos.refeicao_id');
+        // $queryCupom->leftJoin('alunos', 'alunos.id', '=', 'cupom_alimentacaos.aluno_id')
+                    // ->leftJoin('users', 'users.id', '=', 'alunos.user_id')
+                    // ->leftJoin('refeicaos', 'refeicaos.id', '=', 'cupom_alimentacaos.refeicao_id');
 
-        $cupomalimentacaos = $queryCupom->get([
-                            'cupom_alimentacaos.id as cupom_id',
-                            'cupom_alimentacaos.created_at as cupom_data',
-                            'cupom_alimentacaos.pagamento_alimentacao_id',
-                            'alunos.matricula',
-                            'refeicaos.name as refeicao_name',
-                            'refeicaos.valor as refeicao_valor',
-                            'users.name as aluno_name'
-                            ]);
+        // $cupomalimentacaos = $queryCupom->get([
+                            // 'cupom_alimentacaos.id as cupom_id',
+                            // 'cupom_alimentacaos.created_at as cupom_data',
+                            // 'cupom_alimentacaos.pagamento_alimentacao_id',
+                            // 'alunos.matricula',
+                            // 'refeicaos.name as refeicao_name',
+                            // 'refeicaos.valor as refeicao_valor',
+                            // 'users.name as aluno_name'
+                            // ]);]
 
         return view('pagamentoalimentacao.create', compact('pagamentoalimentacaos', 'cupomalimentacaos'));
     }
@@ -124,7 +122,7 @@ class PagamentoAlimentacaoController extends Controller
         $pagamentoalimentacao = new PagamentoAlimentacao();
         $pagamentoalimentacao->save();
 
-        return redirect()->route('pagamentoalimentacao.index');
+        return redirect()->route('cupomalimentacao.listtopay');
     }
 
     /**

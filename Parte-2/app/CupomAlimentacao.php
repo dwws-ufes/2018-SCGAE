@@ -38,7 +38,8 @@ class CupomAlimentacao extends Model
         return $this->belongsTo('App\Refeicao');
     }
 
-    public function getCuponsValidados(){
-        
+    public function pagamentoalimentacao()
+    {
+        return $this->belongsTo('App\PagamentoAlimentacao');
     }
 }
