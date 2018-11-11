@@ -48,7 +48,7 @@
                             <?php
                           }else{
                             ?>
-                              <a href="{{ $pagamento->id }}">Ver detalhes</a>
+                              <a href="pagamentoalimentacao/{{ $pagamento->id }}">Ver detalhes</a>
                             <?php
                           }
                           ?>

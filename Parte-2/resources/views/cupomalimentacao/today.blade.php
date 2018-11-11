@@ -61,6 +61,7 @@
                           if(Date('H-i-s')<$refeicao->termino){
                             if($refeicao->emissao_cupom == null){
                               ?>
+                              
                               <form action="<?php echo route('cupomalimentacao.store'); ?>"  method="post">
                                 {!! csrf_field() !!}
                                 <input type="text" name="refeicaoId" style="display: none;" value="<?php echo $refeicao->id ?>">

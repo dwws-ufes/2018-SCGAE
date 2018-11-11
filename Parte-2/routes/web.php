@@ -11,6 +11,20 @@
 |
 */
 
+
+/*
+
+Quando usa-se ::resource (exemplo para users)
+Verb          Path                        Action  Route Name
+GET           /users                      index   users.index
+GET           /users/create               create  users.create
+POST          /users                      store   users.store
+GET           /users/{user}               show    users.show
+GET           /users/{user}/edit          edit    users.edit
+PUT|PATCH     /users/{user}               update  users.update
+DELETE        /users/{user}               destroy users.destroy
+*/
+
 Route::redirect('/', '/home', 301);
 
 Auth::routes();
@@ -36,7 +50,7 @@ Route::post('/cupomalimentacao/dovalidate', 'CupomAlimentacaoController@doValida
 
 
 Route::get('/pagamentoalimentacao/create', 'PagamentoAlimentacaoController@create')->name('pagamentoalimentacao.create');
-Route::get('/pagamentoalimentacao/list', 'PagamentoAlimentacaoController@list')->name('pagamentoalimentacao.list');
+Route::get('/pagamentoalimentacao', 'PagamentoAlimentacaoController@index')->name('pagamentoalimentacao.index');
 Route::post('/pagamentoalimentacao/create', 'PagamentoAlimentacaoController@setPagamento')->name('pagamentoalimentacao.setpagamento');
 Route::get('pagamentoalimentacao/{pagamentoalimentacao}',  ['as' => 'pagamentoalimentacao.show', 'uses' => 'PagamentoAlimentacaoController@show']);
 

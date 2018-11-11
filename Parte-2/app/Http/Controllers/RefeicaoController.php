@@ -93,6 +93,7 @@ class RefeicaoController extends Controller
     {
         //
         $data = $request->all();
+        // dd($data);
         $refeicao['name'] = $data['name'];
         $refeicao['valor'] = $data['valor'];
         $refeicao['inicio'] = $data['inicio'];

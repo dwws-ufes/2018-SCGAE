@@ -15,6 +15,7 @@
             {{-- {{ dd($user)}} --}}
            
             <form action="<?php echo route('aluno.update',['aluno' => $aluno]); ?>" method="post">
+                {{method_field('PUT')}}
                 {!! csrf_field() !!}
 
                 <div class="form-group has-feedback {{ $errors->has('name') ? 'has-error' : '' }}">

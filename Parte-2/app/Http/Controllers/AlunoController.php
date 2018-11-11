@@ -99,6 +99,8 @@ class AlunoController extends Controller
 
         $escola = Escola::firstOrFail();
 
+
+
         $aluno = new Aluno([
             'telefone' => $data['telefone'],
             'matricula' => $data['matricula'],
@@ -113,7 +115,7 @@ class AlunoController extends Controller
         $aluno->user()->associate($user);
         $aluno->save();
 
-        return redirect()->route('escola.index');
+        return redirect()->route('aluno.index');
     }
 
 
