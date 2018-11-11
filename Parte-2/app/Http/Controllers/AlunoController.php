@@ -14,6 +14,8 @@ use App\EnderecoAluno;
 use App\Escola;
 use App\Repositories\Contracts\AlunoRepository;
 use Kurt\Repoist\Repositories\Eloquent\Criteria\EagerLoad;
+use Illuminate\Support\Facades\Auth;
+use App\UserEscola;
 
 class AlunoController extends Controller
 {
@@ -97,9 +99,8 @@ class AlunoController extends Controller
 
         $endereco->save();
 
-        $escola = Escola::firstOrFail();
-
-
+        $userEscola = UserEscola::find(Auth::user()->id) ;
+        $escola = $userEscola ? $userEscola->escola : Escola::firstOrFail();
 
         $aluno = new Aluno([
             'telefone' => $data['telefone'],

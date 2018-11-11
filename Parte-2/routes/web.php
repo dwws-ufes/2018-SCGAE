@@ -32,13 +32,13 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::resource('aluno', 'AlunoController');
+    Route::resource('aluno', 'AlunoController')->middleware('can:aluno.manage,aluno');
 
-    Route::resource('refeicao', 'RefeicaoController');
+    Route::resource('refeicao', 'RefeicaoController')->middleware('can:refeicao.manage,refeicao');
 
-    Route::resource('escola', 'EscolaController');
+    Route::resource('escola', 'EscolaController')->middleware('can:escola.manage,escola');
 
-    Route::resource('restaurante', 'RestauranteController');
+    Route::resource('restaurante', 'RestauranteController')->middleware('can:restaurante.manage,restaurante');
 
 
     Route::post('/cupomalimentacao/store', 'CupomAlimentacaoController@store')->name('cupomalimentacao.store');
@@ -49,8 +49,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/cupomalimentacao/validate', 'CupomAlimentacaoController@validateView')->name('cupomalimentacao.validate');
     Route::post('/cupomalimentacao/dovalidate', 'CupomAlimentacaoController@doValidate')->name('cupomalimentacao.dovalidate');
 
-Route::post('/cupomalimentacao/listToPay/{pagamentoalimentacao}', 'CupomAlimentacaoController@listToPay')->name('cupomalimentacao.listtopay');
-Route::get('/cupomalimentacao/listToPay/{pagamentoalimentacao}', 'CupomAlimentacaoController@listToPay')->name('cupomalimentacao.listtopay');
+    Route::post('/cupomalimentacao/listToPay/{pagamentoalimentacao}', 'CupomAlimentacaoController@listToPay')->name('cupomalimentacao.listtopay');
+    Route::get('/cupomalimentacao/listToPay/{pagamentoalimentacao}', 'CupomAlimentacaoController@listToPay')->name('cupomalimentacao.listtopay');
 
 
     Route::get('/pagamentoalimentacao/create', 'PagamentoAlimentacaoController@create')->name('pagamentoalimentacao.create');

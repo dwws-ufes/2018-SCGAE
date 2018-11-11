@@ -1,5 +1,10 @@
 <?php
 
+use App\Escola;
+use App\Aluno;
+use App\Restaurante;
+use App\Refeicao;
+
 return [
 
     /*
@@ -108,49 +113,73 @@ return [
     */
 
     'menu' => [
-        'AÇÕES PARA ALUNOS',
+        [
+            'header' => 'AÇÕES PARA ALUNOS',
+            'can' => 'aluno.manage',
+            'model' => Aluno::class,
+        ],
         [
             'text' => 'Criar Aluno',
             'url'  => 'aluno/create',
-            // 'can'  => 'manage-blog',
+            'can' => 'aluno.manage',
+            'model' => Aluno::class,
         ],
         [
             'text' => 'Listar Alunos',
             'url'  => 'aluno',
-            // 'can'  => 'manage-blog',
+            'can' => 'aluno.manage',
+            'model' => Aluno::class,
         ],
-        'AÇÕES PARA ESCOLA',
+        [
+            'header' => 'AÇÕES PARA ESCOLA',
+            'can' => 'escola.manage',
+            'model' => Escola::class,
+        ],
         [
             'text' => 'Criar Escola',
             'url'  => 'escola/create',
-            // 'can'  => 'manage-blog',
+            'can' => 'escola.manage',
+            'model' => Escola::class,
         ],
         [
             'text' => 'Listar Escolas',
             'url' => 'escola',
-            // 'can'  => 'manage-blog',
+            'can' => 'escola.manage',
+            'model' => Escola::class,
         ],
-        'AÇÕES PARA RESTAURANTE',
+        [
+            'header' => 'AÇÕES PARA RESTAURANTE',
+            'can' => 'restaurante.manage',
+            'model' => Restaurante::class,
+        ],
         [
             'text' => 'Criar Restaurante',
             'url'  => 'restaurante/create',
-            // 'can'  => 'manage-blog',
+            'can' => 'restaurante.manage',
+            'model' => Restaurante::class,
         ],
         [
             'text' => 'Listar Restaurantes',
             'url' => 'restaurante',
-            // 'can'  => 'manage-blog',
+            'can' => 'restaurante.manage',
+            'model' => Restaurante::class,
         ],
-        'AÇÕES PARA REFEIÇÃO',
+        [
+            'header' => 'AÇÕES PARA REFEIÇÃO',
+            'can' => 'refeicao.manage',
+            'model' => Refeicao::class,
+        ],
         [
             'text' => 'Criar Refeição',
             'url'  => 'refeicao/create',
-            // 'can'  => 'manage-blog',
+            'can' => 'refeicao.manage',
+            'model' => Refeicao::class,
         ],
         [
             'text' => 'Listar Refeições',
             'url'  => 'refeicao',
-            // 'can'  => 'manage-blog',
+            'can' => 'refeicao.manage',
+            'model' => Refeicao::class,
         ],
         'AÇÕES PARA CUPOM ALIMENTAÇÃO',
         [
