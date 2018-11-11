@@ -9,7 +9,7 @@ return [
     'register'                    => 'Registrar',
     'register_a_new_membership'   => 'Registrar um novo membro',
     'i_forgot_my_password'        => 'Esqueci a senha',
-    'define_password'        => 'Definir ou redefinir a senha',
+    'define_password'             => 'Definir ou redefinir a senha',
     'i_already_have_a_membership' => 'Já sou um membro',
     'sign_in'                     => 'Entrar',
     'log_out'                     => 'Sair',
@@ -35,4 +35,8 @@ return [
     'cidade' => 'Cidade',
     'estado' => 'Estado',
     'pais' => 'País',
+    'name' => 'Nome',
+    'valor' => 'Valor',
+    'inicio' => 'Início',
+    'termino' => 'Término',
 ];

@@ -1,72 +1,45 @@
-@extends('adminlte::page')
+@extends('layouts.forms.create')
 
-@section('title', 'Home')
+@section('title', 'Inserir Refeição')
 
 @section('content_header')
-    <h1>Inserir Novo Aluno</h1>
+    <h1>Inserir Refeição</h1>
 @stop
 
-@section('content')
-    <div class="register-box">
-
-        <div class="register-box-body">
-           
-            <form action="<?php echo route('refeicao.store'); ?>" method="post">
-                {!! csrf_field() !!}
-
-                <div class="form-group has-feedback {{ $errors->has('name') ? 'has-error' : '' }}">
-                    <input type="text" name="name" class="form-control" value="{{ old('name') }}"
-                           placeholder="{{ trans('adminlte::adminlte.full_name') }}">
-                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                    @if ($errors->has('name'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('name') }}</strong>
-                        </span>
-                    @endif
-                </div>
+@section('form_action')
+<?php echo route('refeicao.store'); ?>
+@stop
 
 
-                <div class="form-group has-feedback {{ $errors->has('valor') ? 'has-error' : '' }}">
-                    <input type="text" name="valor" class="form-control" value="{{ old('valor') }}"
-                           placeholder="{{ trans('adminlte::adminlte.valor') }}">
-                    <span class="glyphicon glyphicon-phone form-control-feedback"></span>
-                    @if ($errors->has('valor'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('valor') }}</strong>
-                        </span>
-                    @endif
-                </div>
+@section('form_fields')
 
-                <div class="form-group has-feedback {{ $errors->has('inicio') ? 'has-error' : '' }}">
-                    <input type="text" name="inicio" class="form-control" value="{{ old('inicio') }}"
-                           placeholder="{{ trans('adminlte::adminlte.inicio') }}">
-                    <span class="glyphicon glyphicon-phone form-control-feedback"></span>
-                    @if ($errors->has('inicio'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('inicio') }}</strong>
-                        </span>
-                    @endif
-                </div>
+@include('partials.forms.field', [
+'field_name' =>'name',
+'type' => 'text',
+'placeholder' => trans('adminlte::adminlte.full_name'),
+'value' => old('name'),
+])
 
-                <div class="form-group has-feedback {{ $errors->has('termino') ? 'has-error' : '' }}">
-                    <input type="text" name="termino" class="form-control" value="{{ old('termino') }}"
-                           placeholder="{{ trans('adminlte::adminlte.termino') }}">
-                    <span class="glyphicon glyphicon-phone form-control-feedback"></span>
-                    @if ($errors->has('termino'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('termino') }}</strong>
-                        </span>
-                    @endif
-                </div>
+@include('partials.forms.field', [
+'field_name' =>'valor',
+'type' => 'text',
+'placeholder' => trans('adminlte::adminlte.valor'),
+'value' => old('valor'),
+])
 
 
+@include('partials.forms.field', [
+'field_name' =>'inicio',
+'type' => 'text',
+'placeholder' => trans('adminlte::adminlte.inicio'),
+'value' => old('inicio'),
+])
 
+@include('partials.forms.field', [
+'field_name' =>'termino',
+'type' => 'text',
+'placeholder' => trans('adminlte::adminlte.termino'),
+'value' => old('termino'),
+])
 
-                <button type="submit"
-                        class="btn btn-primary btn-block btn-flat"
-                >{{ trans('adminlte::adminlte.register') }}</button>
-            </form>
-        </div>
-        <!-- /.form-box -->
-    </div><!-- /.register-box -->
 @stop

@@ -26,7 +26,6 @@ class RefeicaoController extends Controller
      */
     public function create()
     {
-        //
         return view('refeicao.create');
     }
 
@@ -38,7 +37,6 @@ class RefeicaoController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $data = $request->all();
 
         $refeicao = Refeicao::create([
@@ -48,11 +46,7 @@ class RefeicaoController extends Controller
             'termino' => $data['termino']
         ]);
 
-        return view('/home');
-    }
-
-    public function list()
-    {
+        return redirect()->route('refeicao.index');
     }
 
     /**
