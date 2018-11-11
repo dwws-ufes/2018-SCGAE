@@ -9,10 +9,21 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use App\Repositories\Contracts\PagamentoAlimentacaoRepository;
+use App\Repositories\Contracts\CupomAlimentacaoRepository;
+use Kurt\Repoist\Repositories\Eloquent\Criteria\EagerLoad;
+
 ;
 
 class PagamentoAlimentacaoController extends Controller
 {
+    private $pagamentoalimentacaos;
+
+    public function __construct(PagamentoAlimentacaoRepository $pagamentoalimentacaos){
+        $this->pagamentoalimentacaos = $pagamentoalimentacaos;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -21,8 +32,10 @@ class PagamentoAlimentacaoController extends Controller
     public function index()
     {
         $pagamentos = PagamentoAlimentacao::all();
+        $pagamentoAberto = PagamentoAlimentacao::where('data_pagamento',null)->first();
+        // dd($pagamentoAberto);
 
-        return view('pagamentoalimentacao.index', compact('pagamentos'));
+        return view('pagamentoalimentacao.index', compact('pagamentos','pagamentoAberto'));
     }
 
     /**
@@ -32,20 +45,26 @@ class PagamentoAlimentacaoController extends Controller
      */
     public function create()
     {
-        //
-        $pagamento = DB::table("pagamento_alimentacaos")
-                    ->where('data_pagamento', '=', null)
-                    ->get();
+        $pagamentoalimentacaos = $this->pagamentoalimentacaos
+                            ->findWhere('data_pagamento', null);
 
         $queryCupom = DB::table('cupom_alimentacaos')
                         ->where('horario_utilizacao', '!=', null)
                         ->where('pagamento_alimentacao_id', '=', null);
 
-        if (sizeof($pagamento)==0) {
-            $pagamento = PagamentoAlimentacao::create([]);
+        if (sizeof($pagamentoalimentacaos)==0) {
+
+            $pagamentoalimentacaos = PagamentoAlimentacao::create([]);
+
         } else {
-            $pagamento = $pagamento->first();
-            $queryCupom->orWhere('pagamento_alimentacao_id', '=', $pagamento->id);
+
+            $pagamentoalimentacaos = $pagamentoalimentacaos->first();
+
+            $cupomalimentacaos = $pagamentoalimentacaos->cupomalimentacao;
+            // dd($cupomalimentacaos);
+
+            $queryCupom->orWhere('pagamento_alimentacao_id', '=', $pagamentoalimentacaos->id);
+
         }
 
         $queryCupom->leftJoin('alunos', 'alunos.id', '=', 'cupom_alimentacaos.aluno_id')
@@ -62,7 +81,7 @@ class PagamentoAlimentacaoController extends Controller
                             'users.name as aluno_name'
                             ]);
 
-        return view('pagamentoalimentacao.create', compact('pagamento', 'cupomalimentacaos'));
+        return view('pagamentoalimentacao.create', compact('pagamentoalimentacaos', 'cupomalimentacaos'));
     }
 
 
@@ -102,6 +121,10 @@ class PagamentoAlimentacaoController extends Controller
     public function store(Request $request)
     {
         //
+        $pagamentoalimentacao = new PagamentoAlimentacao();
+        $pagamentoalimentacao->save();
+
+        return redirect()->route('pagamentoalimentacao.index');
     }
 
     /**

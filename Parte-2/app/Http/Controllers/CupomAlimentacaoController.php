@@ -5,14 +5,25 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Aluno;
 use App\Refeicao;
+use App\PagamentoAlimentacao;
 use Illuminate\Support\Facades\Auth;
 use App\CupomAlimentacao;
 use Illuminate\Http\Request;
 use Date;
 use Illuminate\Support\Facades\DB;
 
+use App\Repositories\Contracts\CupomAlimentacaoRepository;
+use Kurt\Repoist\Repositories\Eloquent\Criteria\EagerLoad;
+
 class CupomAlimentacaoController extends Controller
 {
+    
+    private $cupomalimentacaos;
+
+    public function __construct(CupomAlimentacaoRepository $cupomalimentacaos){
+        $this->cupomalimentacaos = $cupomalimentacaos;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -39,13 +50,7 @@ class CupomAlimentacaoController extends Controller
                     )->orderBy("inicio")
                     ->get();
 
-        
-
-
         return view('cupomalimentacao.today', compact('user','aluno','refeicaos'));
-
-        // dd($aluno);
-
     }
 
     /**
@@ -124,18 +129,21 @@ class CupomAlimentacaoController extends Controller
         $cupomAlimentacao['horario_utilizacao'] = Date('Y-m-d H:m:s');
         $cupomAlimentacao->update();
 
-        return redirect()->route('cupomalimentacao.validate', $request);
-        
-        
+        return redirect()->route('cupomalimentacao.validate', $request);     
     }
 
     public function reportMeusCupons(Request $request){
         $data = $request->all();
-        // dd($data);
         if(empty($data)){
-            return view('relatorio.meuscupons');
-        }
 
+            $cupomalimentacaos = $this->cupomalimentacaos->withCriteria([
+                new EagerLoad(['aluno']),
+                new EagerLoad(['refeicao']),
+
+            ])->all();
+
+            return view('relatorio.meuscupons', compact('cupomalimentacaos'));
+        }
     }
 
     /**

@@ -48,6 +48,9 @@ Route::get('/cupomalimentacao/validate', 'CupomAlimentacaoController@validateVie
 Route::post('/cupomalimentacao/validate', 'CupomAlimentacaoController@validateView')->name('cupomalimentacao.validate');
 Route::post('/cupomalimentacao/dovalidate', 'CupomAlimentacaoController@doValidate')->name('cupomalimentacao.dovalidate');
 
+Route::post('/cupomalimentacao/listToPay/{pagamentoalimentacao}', 'CupomAlimentacaoController@listToPay')->name('cupomalimentacao.listtopay');
+Route::get('/cupomalimentacao/listToPay/{pagamentoalimentacao}', 'CupomAlimentacaoController@listToPay')->name('cupomalimentacao.listtopay');
+
 
 Route::get('/pagamentoalimentacao/create', 'PagamentoAlimentacaoController@create')->name('pagamentoalimentacao.create');
 Route::get('/pagamentoalimentacao', 'PagamentoAlimentacaoController@index')->name('pagamentoalimentacao.index');

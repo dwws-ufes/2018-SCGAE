@@ -13,11 +13,11 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h2 class="box-title">Valor total do pagamento até o momento: {{ $pagamento->valor }}</h2>
+              <h2 class="box-title">Valor total do pagamento até o momento: {{ $pagamentoalimentacaos->valor }}</h2>
               
               <form method="post" action="<?php echo route('pagamentoalimentacao.setpagamento'); ?>" style="float:right;">
                 {!! csrf_field() !!}
-                <input type="text" name="pagamento_id" value="{{ $pagamento->id }}" style="display: none;">
+                <input type="text" name="pagamento_id" value="{{ $pagamentoalimentacaos->id }}" style="display: none;">
                 <input type="text" name="action" value="pagar" style="display: none;">
                 <button type="submit">Pagar Agora</button>
               </form>
@@ -51,9 +51,9 @@
                             {!! csrf_field() !!}
                             <input type="text" name="cupom_id" value="{{ $cupom->cupom_id }}" style="display: none;">
                             <input type="text" name="refeicao_valor" value="{{ $cupom->refeicao_valor }}" style="display: none;">
-                            <input type="text" name="pagamento_id" value="{{ $pagamento->id }}" style="display: none;">
+                            <input type="text" name="pagamento_id" value="{{ $pagamentoalimentacaos->id }}" style="display: none;">
                           <?php
-                            if($cupom->pagamento_alimentacao_id == $pagamento->id){
+                            if($cupom->pagamento_alimentacao_id == $pagamentoalimentacaos->id){
                               ?>
                                 <input type="text" name="action" value="excluir" style="display: none;">
                                 <button type="submit">Excluir</button>
