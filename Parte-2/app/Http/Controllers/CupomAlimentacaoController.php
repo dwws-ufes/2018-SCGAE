@@ -146,6 +146,23 @@ class CupomAlimentacaoController extends Controller
         }
     }
 
+    public function listToPay (Request $request, PagamentoAlimentacao $pagamentoalimentacao){
+        
+        // dd($pagamentoalimentacao);
+
+        $cupomalimentacaos = $this->cupomalimentacaos
+                                ->withCriteria([
+                                    new EagerLoad(['aluno']),
+                                    new EagerLoad(['refeicao']),
+                                    new EagerLoad(['aluno.user']),
+                                ])
+                                ->findWhere('pagamentoalimentacao_id',null)
+                                ->where('horario_utilizacao','!=', null);
+                                
+        // dd($cupomalimentacaos);
+        return view('cupomalimentacao.listtopay',compact('cupomalimentacaos', 'pagamentoalimentacao'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -165,9 +182,17 @@ class CupomAlimentacaoController extends Controller
      * @param  \App\CupomAlimentacao  $cupomAlimentacao
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CupomAlimentacao $cupomAlimentacao)
+    public function update(Request $request, CupomAlimentacao $cupomalimentacao)
     {
         //
+        $data = $request->all();
+        $pagamentoalimentacao = PagamentoAlimentacao::find($data['pagamento_id']);
+
+        $cupomalimentacao->pagamentoalimentacao()->associate($pagamentoalimentacao);
+        $cupomalimentacao->save();
+        $pagamentoalimentacao->somaValor($cupomalimentacao->refeicao->valor);
+        $pagamentoalimentacao->save();
+        return redirect()->route('cupomalimentacao.listtopay', ['pagamentoalimentacao' => $pagamentoalimentacao]); 
     }
 
     /**

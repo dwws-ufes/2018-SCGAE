@@ -40,7 +40,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('restaurante', 'RestauranteController')->middleware('can:restaurante.manage,restaurante');
 
-
     Route::post('/cupomalimentacao/store', 'CupomAlimentacaoController@store')->name('cupomalimentacao.store');
     Route::get('/cupomalimentacao/today', 'CupomAlimentacaoController@today')->name('cupomalimentacao.today');
     Route::get('cupomalimentacao/print/{cupomalimentacao}', ['as' => 'cupomalimentacao.show', 'uses' => 'CupomAlimentacaoController@show']);
@@ -49,6 +48,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/cupomalimentacao/validate', 'CupomAlimentacaoController@validateView')->name('cupomalimentacao.validate');
     Route::post('/cupomalimentacao/dovalidate', 'CupomAlimentacaoController@doValidate')->name('cupomalimentacao.dovalidate');
 
+    Route::post('/cupomalimentacao/{cupomalimentacao}', 'CupomAlimentacaoController@update')->name('cupomalimentacao.update');
     Route::post('/cupomalimentacao/listToPay/{pagamentoalimentacao}', 'CupomAlimentacaoController@listToPay')->name('cupomalimentacao.listtopay');
     Route::get('/cupomalimentacao/listToPay/{pagamentoalimentacao}', 'CupomAlimentacaoController@listToPay')->name('cupomalimentacao.listtopay');
 
