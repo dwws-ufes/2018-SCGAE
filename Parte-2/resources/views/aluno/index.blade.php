@@ -44,7 +44,7 @@
                         <td> {{ $aluno->rendaFamiliar }} </td>
                         <td> {{ $aluno->auxilioAlimentacao }} </td>
                         <td> {{ $aluno->auxilioTransporte }} </td>
-                        <td><a href="<?php echo url("/aluno/{$aluno->id}"); ?>">Editar</a></td>
+                        <td><a href="<?php echo url("/aluno/{$aluno->id}/edit"); ?>">Editar</a></td>
                     </tr>
                     
                     

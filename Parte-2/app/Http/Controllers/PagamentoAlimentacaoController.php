@@ -75,7 +75,7 @@ class PagamentoAlimentacaoController extends Controller
             $pagamento['data_pagamento'] = Date('Y-m-d H-i-s');
             $pagamento->update();
 
-            return redirect()->route('pagamentoalimentacao.list');
+            return redirect()->route('pagamentoalimentacao.index');
         }
 
         $cupom =  CupomAlimentacao::find($data['cupom_id']);

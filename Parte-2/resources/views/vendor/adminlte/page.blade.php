@@ -52,6 +52,9 @@
                 <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
                     <span class="sr-only">{{ trans('adminlte::adminlte.toggle_navigation') }}</span>
                 </a>
+                <div style="float:left;padding:15px;">
+                    <span>Olá, <b>{{ Auth::user()['name'] }}</b>!</span>
+                </div>
             @endif
                 <!-- Navbar Right Menu -->
                 <div class="navbar-custom-menu">

@@ -36,7 +36,7 @@
                         <td> {{ $refeicao->valor }}</td>
                         <td> {{ $refeicao->inicio }}</td>
                         <td> {{ $refeicao->termino }} </td>
-                        <td><a href="<?php echo url("/refeicao/{$refeicao->id}"); ?>">Editar</a></td>
+                        <td><a href="<?php echo url("/refeicao/{$refeicao->id}/edit"); ?>">Editar</a></td>
                     </tr>
                     
                     

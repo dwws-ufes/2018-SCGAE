@@ -28,15 +28,31 @@
     				Horário da Emissão: {{ $cupomAlimentacao->created_at }} <br>
 
     				<?php 
-    					if( !isset($cupomAlimentacao->horario_utilizacao)){
-    						?>
-    							<button type="submit">Confirmar Validação do Cupom</button>
-    						<?php
-    					}else{
-    						?>
-    							<br> CUPOM VALIDADO! <BR>
-    						<?php
-    					}
+                        $now = Date('H:i:s');
+                        if($now<$refeicao->termino){
+                            if($now>$refeicao->inicio){
+                                if( !isset($cupomAlimentacao->horario_utilizacao)){
+                                    ?>
+                                        <button type="submit">Confirmar Validação do Cupom</button>
+                                    <?php
+                                }else{
+                                    ?>
+                                        <br> CUPOM VALIDADO! <BR>
+                                    <?php
+                                }
+                            }else{
+                                ?>
+                                <br> ESSA CUPOM É DE UMA REFEIÇÃO QUE AINDA NÃO COMEÇOU <BR>
+                                <?php
+                            }
+
+                            
+                        }else{
+                            ?>
+                            <br> ESSA CUPOM É DE UMA REFEIÇÃO QUE JÁ TERMINOU <BR>
+                            <?php
+                        }
+    					
     				?>
 
     				
