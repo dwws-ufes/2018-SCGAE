@@ -68,16 +68,14 @@
 'placeholder' => trans('adminlte::adminlte.renda_familiar'),
 'value' => old('rendaFamiliar'),
 ])
-@include('partials.forms.field', [
+@include('partials.forms.checkbox', [
 'field_name' =>'auxilioAlimentacao',
-'type' => 'checkbox',
 'placeholder' => trans('adminlte::adminlte.auxilio_alimentacao'),
 'value' => old('auxilioAlimentacao'),
 ])
 
-@include('partials.forms.field', [
+@include('partials.forms.checkbox', [
 'field_name' =>'auxilioTransporte',
-'type' => 'checkbox',
 'placeholder' => trans('adminlte::adminlte.auxilio_transporte'),
 'value' => old('auxilioTransporte'),
 ])
