@@ -45,3 +45,4 @@ Instalação no Windows:
 	b) php artisan key:generate
 	c) php artisan migrate:install
 	d) php artisan migrate
+	e) php artisan db:seed
