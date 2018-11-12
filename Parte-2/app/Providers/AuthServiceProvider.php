@@ -42,6 +42,17 @@ class AuthServiceProvider extends ServiceProvider
         return UserAluno::find($user->id)->aluno !== null;
     }
 
+    private function isAlunoHabilitadoCupomAlimentacao($user)
+    {
+        $aluno = UserAluno::find($user->id)->aluno;
+
+        if ($aluno) {
+            return $aluno->auxilioAlimentacao;
+        }
+
+        return false;
+    }
+
     private function isUserRestaurante($user)
     {
         return UserRestaurante::find($user->id)->restaurante !== null;
@@ -101,7 +112,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('cupomalimentacao.emitir', function ($user, $cupomalimentacao = null) {
-            return $this->isUserAluno($user);
+            return $this->isUserAluno($user) && $this->isAlunoHabilitadoCupomAlimentacao($user);
         });
 
         Gate::define('cupomalimentacao.validar', function ($user, $cupomalimentacao = null) {

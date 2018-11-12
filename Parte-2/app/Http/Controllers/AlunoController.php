@@ -16,6 +16,7 @@ use App\Repositories\Contracts\AlunoRepository;
 use Kurt\Repoist\Repositories\Eloquent\Criteria\EagerLoad;
 use Illuminate\Support\Facades\Auth;
 use App\UserEscola;
+use Illuminate\Support\Facades\Password;
 
 class AlunoController extends Controller
 {
@@ -115,6 +116,13 @@ class AlunoController extends Controller
         $aluno->endereco()->associate($endereco);
         $aluno->user()->associate($user);
         $aluno->save();
+
+
+        if (env('MAIL_USERNAME') && env('MAIL_PASSWORD')) {
+            Password::broker()->sendResetLink(
+                ['email' => $data['email']]
+            );
+        }
 
         return redirect()->route('aluno.index');
     }
