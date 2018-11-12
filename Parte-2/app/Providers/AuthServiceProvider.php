@@ -15,6 +15,7 @@ use App\UserAluno;
 use App\UserRestaurante;
 use App\Escola;
 use function Psy\debug;
+use App\CupomAlimentacao;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -42,15 +43,23 @@ class AuthServiceProvider extends ServiceProvider
         return UserAluno::find($user->id)->aluno !== null;
     }
 
-    private function isAlunoHabilitadoCupomAlimentacao($user)
+    private function isAlunoHabilitadoCupomAlimentacao($user, $cupomalimentacao)
     {
         $aluno = UserAluno::find($user->id)->aluno;
 
-        if ($aluno) {
-            return $aluno->auxilioAlimentacao;
+        if (! $aluno) {
+            return false;
         }
 
-        return false;
+        if (! $aluno->auxilioAlimentacao) {
+            return false;
+        }
+
+        if (($cupomalimentacao instanceof CupomAlimentacao) && $cupomalimentacao->aluno->id != $aluno->id) {
+            return false;
+        }
+
+        return true;
     }
 
     private function isUserRestaurante($user)
@@ -111,7 +120,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('cupomalimentacao.emitir', function ($user, $cupomalimentacao = null) {
-            return $this->isUserAluno($user) && $this->isAlunoHabilitadoCupomAlimentacao($user);
+            return $this->isUserAluno($user) && $this->isAlunoHabilitadoCupomAlimentacao($user, $cupomalimentacao);
         });
 
         Gate::define('cupomalimentacao.validar', function ($user, $cupomalimentacao = null) {
