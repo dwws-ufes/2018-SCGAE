@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use App\Services\DateFormatService;
 
 class CupomAlimentacao extends Model
 {

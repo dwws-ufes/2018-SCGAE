@@ -17,10 +17,10 @@ use Kurt\Repoist\Repositories\Eloquent\Criteria\EagerLoad;
 
 class CupomAlimentacaoController extends Controller
 {
-    
     private $cupomalimentacaos;
 
-    public function __construct(CupomAlimentacaoRepository $cupomalimentacaos){
+    public function __construct(CupomAlimentacaoRepository $cupomalimentacaos)
+    {
         $this->cupomalimentacaos = $cupomalimentacaos;
     }
 
@@ -46,11 +46,14 @@ class CupomAlimentacaoController extends Controller
                     ->leftJoin(
                         DB::raw(
                         "(SELECT id as id_cupom, horario_utilizacao, created_at as emissao_cupom, refeicao_id FROM cupom_alimentacaos WHERE DATE(cupom_alimentacaos.created_at) = '" . Date('Y-m-d') . "') as cupom"
-                        ),'refeicaos.id','=','cupom.refeicao_id'
+                        ),
+                        'refeicaos.id',
+                        '=',
+                        'cupom.refeicao_id'
                     )->orderBy("inicio")
                     ->get();
 
-        return view('cupomalimentacao.today', compact('user','aluno','refeicaos'));
+        return view('cupomalimentacao.today', compact('user', 'aluno', 'refeicaos'));
     }
 
     /**
@@ -75,12 +78,21 @@ class CupomAlimentacaoController extends Controller
         $data = $request->all();
         // dd($data);
 
-        $cupomAlimentacao = CupomAlimentacao::create([
-            'refeicao_id' => $data['refeicaoId'],
-            'aluno_id' => $data['alunoId']
-        ]);
 
-        
+        $aluno = Aluno::findOrFail($data['alunoId']);
+        $refeicao = Refeicao::findOrFail($data['refeicaoId']);
+
+        $cupom = new CupomAlimentacao();
+        $cupom->aluno()->associate($aluno);
+        $cupom->refeicao()->associate($refeicao);
+        $cupom->save();
+
+        // $cupomAlimentacao = CupomAlimentacao::create([
+        //     'refeicao_id' => $data['refeicaoId'],
+        //     'aluno_id' => $data['alunoId']
+        // ]);
+
+
         // return route('cupomalimentacao.show',$cupomAlimentacao);
         return redirect()->route('cupomalimentacao.today');
 
@@ -104,10 +116,11 @@ class CupomAlimentacaoController extends Controller
     }
 
 
-    public function validateView(Request $request){
+    public function validateView(Request $request)
+    {
         $data = $request->all();
         // dd($data);
-        if(empty($data)){
+        if (empty($data)) {
             return view('cupomalimentacao.validate');
         }
         // dd($data);
@@ -122,20 +135,21 @@ class CupomAlimentacaoController extends Controller
         return view('cupomalimentacao.validate', compact('cupomAlimentacao', 'aluno', 'user', 'refeicao'));
     }
 
-    public function doValidate(Request $request){
+    public function doValidate(Request $request)
+    {
         $data = $request->all();
 
         $cupomAlimentacao = CupomAlimentacao::find($data['cupomalimentacao_id']);
         $cupomAlimentacao['horario_utilizacao'] = Date('Y-m-d H:m:s');
         $cupomAlimentacao->update();
 
-        return redirect()->route('cupomalimentacao.validate', $request);     
+        return redirect()->route('cupomalimentacao.validate', $request);
     }
 
-    public function reportMeusCupons(Request $request){
+    public function reportMeusCupons(Request $request)
+    {
         $data = $request->all();
-        if(empty($data)){
-
+        if (empty($data)) {
             $cupomalimentacaos = $this->cupomalimentacaos->withCriteria([
                 new EagerLoad(['aluno']),
                 new EagerLoad(['refeicao']),
@@ -146,8 +160,9 @@ class CupomAlimentacaoController extends Controller
         }
     }
 
-    public function listToPay (Request $request, PagamentoAlimentacao $pagamentoalimentacao){
-        
+    public function listToPay(Request $request, PagamentoAlimentacao $pagamentoalimentacao)
+    {
+
         // dd($pagamentoalimentacao);
 
         $cupomalimentacaos = $this->cupomalimentacaos
@@ -156,11 +171,11 @@ class CupomAlimentacaoController extends Controller
                                     new EagerLoad(['refeicao']),
                                     new EagerLoad(['aluno.user']),
                                 ])
-                                ->findWhere('pagamentoalimentacao_id',null)
-                                ->where('horario_utilizacao','!=', null);
-                                
+                                ->findWhere('pagamentoalimentacao_id', null)
+                                ->where('horario_utilizacao', '!=', null);
+
         // dd($cupomalimentacaos);
-        return view('cupomalimentacao.listtopay',compact('cupomalimentacaos', 'pagamentoalimentacao'));
+        return view('cupomalimentacao.listtopay', compact('cupomalimentacaos', 'pagamentoalimentacao'));
     }
 
     /**
@@ -192,7 +207,7 @@ class CupomAlimentacaoController extends Controller
         $cupomalimentacao->update();
         $pagamentoalimentacao->somaValor($cupomalimentacao->refeicao->valor);
         $pagamentoalimentacao->update();
-        return redirect()->route('cupomalimentacao.listtopay', ['pagamentoalimentacao' => $pagamentoalimentacao]); 
+        return redirect()->route('cupomalimentacao.listtopay', ['pagamentoalimentacao' => $pagamentoalimentacao]);
     }
 
     /**

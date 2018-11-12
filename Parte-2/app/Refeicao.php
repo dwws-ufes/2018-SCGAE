@@ -25,8 +25,8 @@ class Refeicao extends Model
     /**
      * Get the cupomalimentacaos for the aluno.
      */
-    // public function cupomalimentacao()
-    // {
-    //     return $this->hasMany('App\CupomAlimentacao');
-    // }
+    public function cupomalimentacao()
+    {
+        return $this->hasMany('App\CupomAlimentacao', 'refeicao_id');
+    }
 }
