@@ -10,6 +10,8 @@ class CupomAlimentacao extends Model
     //
 
     use Notifiable;
+    use DateFormatService;
+
 
     /**
      * The attributes that are mass assignable.
@@ -21,7 +23,7 @@ class CupomAlimentacao extends Model
         'aluno_id',
         'pagamentoalimentacao_id'
     ];
-    
+
     /**
      * The aluno associated with cupomalimentacao
      */

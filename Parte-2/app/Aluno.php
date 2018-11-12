@@ -4,10 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use App\Services\ViewsHelperService;
+use Illuminate\Support\Carbon;
+use App\Services\DateFormatService;
 
 class Aluno extends Model
 {
     use Notifiable;
+    use DateFormatService;
+
 
     /**
      * The attributes that are mass assignable.
@@ -54,5 +59,10 @@ class Aluno extends Model
     public function cupomalimentacao()
     {
         return $this->hasMany('App\CupomAlimentacao');
+    }
+
+    public function getFormattedCreatedAtAttribute()
+    {
+        return $this->formatDate($this->created_at);
     }
 }

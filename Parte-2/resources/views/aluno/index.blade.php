@@ -10,6 +10,7 @@
     @include('partials.list-items', [
         'fields' => [
             'user.name' => 'Nome',
+            'formatted_created_at' => 'Criado em',
             'matricula' => 'Matrícula',
             'cpf' => 'CPF',
             'user.email' => 'Email',

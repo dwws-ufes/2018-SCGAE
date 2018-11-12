@@ -10,7 +10,8 @@ class PagamentoAlimentacao extends Model
 {
     //
 
-     use Notifiable;
+    use Notifiable;
+    use DateFormatService;
 
     /**
      * The attributes that are mass assignable.
@@ -21,7 +22,7 @@ class PagamentoAlimentacao extends Model
         'valor',
         'data_pagamento'
     ];
-    
+
     /**
      * The cupomalimentacaos associated with pagamentoalimentacao
      */
@@ -30,11 +31,13 @@ class PagamentoAlimentacao extends Model
         return $this->hasMany('App\CupomAlimentacao', 'pagamentoalimentacao_id');
     }
 
-    public function somaValor(float $value){
+    public function somaValor(float $value)
+    {
         $this->valor += $value;
     }
 
-    public function setDataPagamento(string $date){
+    public function setDataPagamento(string $date)
+    {
         $this->data_pagamento = $date;
     }
 }
