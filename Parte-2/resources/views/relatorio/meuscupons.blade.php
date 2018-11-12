@@ -24,7 +24,7 @@
 
 @include('partials.list-items', [
         'fields' => [
-            'created_at' => 'Data',
+            'formatted_created_at' => 'Data',
             'refeicao.name' => 'Refeição',
             'refeicao.valor' => 'Valor',
             'horario_utilizacao' => 'Horário da Utilização',

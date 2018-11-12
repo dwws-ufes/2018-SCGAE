@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use App\Services\DateFormatService;
 
 class CupomAlimentacao extends Model
 {
@@ -43,5 +44,10 @@ class CupomAlimentacao extends Model
     public function pagamentoalimentacao()
     {
         return $this->belongsTo('App\PagamentoAlimentacao', 'pagamentoalimentacao_id');
+    }
+
+    public function getFormattedCreatedAtAttribute()
+    {
+        return $this->formatDate($this->created_at,'d/m/Y');
     }
 }
