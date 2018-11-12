@@ -107,8 +107,8 @@ class AlunoController extends Controller
             'matricula' => $data['matricula'],
             'cpf' => $data['cpf'],
             'rendaFamiliar' => $data['rendaFamiliar'],
-            'auxilioAlimentacao' => isset($data['auxilioAlimentacao']),
-            'auxilioTransporte' => isset($data['auxilioTransporte'])
+            'auxilioAlimentacao' => intval($data['auxilioAlimentacao']),
+            'auxilioTransporte' => intval($data['auxilioTransporte']),
         ]);
 
         $aluno->escola()->associate($escola);
