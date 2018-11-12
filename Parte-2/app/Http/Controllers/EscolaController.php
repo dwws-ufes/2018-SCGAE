@@ -117,7 +117,7 @@ class EscolaController extends Controller
      */
     public function edit(Escola $escola)
     {
-        //
+        return view('escola.edit', compact('escola'));
     }
 
     /**
@@ -129,7 +129,28 @@ class EscolaController extends Controller
      */
     public function update(Request $request, Escola $escola)
     {
-        //
+        $user_data = $request->only('email', 'name');
+
+        $endereco_data = $request->only(
+            'logradouro',
+            'numero',
+            'complemento',
+            'cep',
+            'bairro',
+            'cidade',
+            'estado',
+            'pais'
+        );
+
+        $escola_data = $request->only(
+            'cnpj'
+        );
+
+        $escola->user()->update($user_data);
+        $escola->endereco()->update($endereco_data);
+        $escola->update($escola_data);
+
+        return redirect()->route('escola.index');
     }
 
     /**
