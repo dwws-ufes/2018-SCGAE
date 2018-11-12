@@ -88,14 +88,14 @@ class RefeicaoController extends Controller
      */
     public function update(Request $request, Refeicao $refeicao)
     {
-        //
-        $data = $request->all();
-        // dd($data);
-        $refeicao['name'] = $data['name'];
-        $refeicao['valor'] = $data['valor'];
-        $refeicao['inicio'] = $data['inicio'];
-        $refeicao['termino'] = $data['termino'];
-        $refeicao->update();
+        $data = $request->only(
+            'name',
+            'valor',
+            'inicio',
+            'termino'
+        );
+
+        $refeicao->update($data);
 
         return redirect()->route('refeicao.index');
     }

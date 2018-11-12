@@ -108,7 +108,7 @@ class RestauranteController extends Controller
      */
     public function edit(Restaurante $restaurante)
     {
-        //
+        return view('restaurante.edit', compact('restaurante'));
     }
 
     /**
@@ -120,7 +120,17 @@ class RestauranteController extends Controller
      */
     public function update(Request $request, Restaurante $restaurante)
     {
-        //
+        $user_data = $request->only('email', 'name');
+
+        $restaurante_data = $request->only(
+            'cnpj',
+            'telefone'
+        );
+
+        $restaurante->user()->update($user_data);
+        $restaurante->update($restaurante_data);
+
+        return redirect()->route('restaurante.index');
     }
 
     /**

@@ -1,13 +1,13 @@
 @extends('layouts.forms.edit')
 
-@section('title', 'Editar Escola')
+@section('title', 'Editar Restaurante')
 
 @section('content_header')
-    <h1>Editar Escola</h1>
+    <h1>Editar Restaurante</h1>
 @stop
 
 @section('form_action')
-{{ route('escola.update',['escola' => $escola]) }}
+{{ route('restaurante.update',['restaurante' => $restaurante]) }}
 @stop
 
 @section('form_fields')
@@ -16,31 +16,27 @@
 'field_name' =>'name',
 'type' => 'text',
 'placeholder' => trans('adminlte::adminlte.full_name'),
-'value' => $escola->user->name,
+'value' => $restaurante->user->name,
 ])
 
 @include('partials.forms.field', [
 'field_name' =>'email',
 'type' => 'email',
 'placeholder' => trans('adminlte::adminlte.email'),
-'value' => $escola->user->email,
+'value' => $restaurante->user->email,
 ])
 
 @include('partials.forms.field', [
 'field_name' =>'cnpj',
 'type' => 'text',
 'placeholder' => trans('adminlte::adminlte.cnpj'),
-'value' => $escola->cnpj,
+'value' => $restaurante->cnpj,
 ])
 
-
-@foreach(['logradouro', 'numero', 'complemento', 'cep', 'bairro', 'cidade', 'estado', 'pais'] as $field_name)
 @include('partials.forms.field', [
-'field_name' => $field_name,
+'field_name' =>'telefone',
 'type' => 'text',
-'placeholder' => trans('adminlte::adminlte.' . $field_name),
-'value' => $escola->endereco->{$field_name},
+'placeholder' => trans('adminlte::adminlte.phone'),
+'value' => $restaurante->telefone,
 ])
-@endforeach
-
 @stop
