@@ -40,6 +40,6 @@ class CupomAlimentacao extends Model
 
     public function pagamentoalimentacao()
     {
-        return $this->belongsTo('App\PagamentoAlimentacao');
+        return $this->belongsTo('App\PagamentoAlimentacao', 'pagamentoalimentacao_id');
     }
 }

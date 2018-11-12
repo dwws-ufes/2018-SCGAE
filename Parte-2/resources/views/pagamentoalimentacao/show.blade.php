@@ -1,9 +1,11 @@
+@inject('helper', 'App\Services\ViewsHelperService')
+
 @extends('adminlte::page')
 
 @section('title', 'Lista de Alunos')
 
 @section('content_header')
-    <h1>Criando Pagamento de Cupom Alientacaçõ</h1>
+    <h1>Detalhes de Pagamento de Alimentação</h1>
 @stop
 
 @section('content')
@@ -15,7 +17,7 @@
             <div class="box-header">
               <h2 class="box-title">Valor total do pagamento: {{ $pagamentoalimentacao->valor }}</h2>
               <br>
-              <h2 class="box-title">Data do pagamento: {{ $pagamentoalimentacao->data_pagamento }}</h2>
+              <h2 class="box-title">Data do pagamento: {!! $helper->formatDate($pagamentoalimentacao->data_pagamento, 'd/m/Y')  !!}</h2>
               
 
               <br><br>
@@ -36,12 +38,12 @@
                 {{-- </thead> --}}
                 {{-- <tbody> --}}
             
-                @foreach($cupomalimentacaos as $cupom)
+                @foreach($pagamentoalimentacao->cupomalimentacao as $cupom)
                     <tr>
-                      <td> {{ $cupom->cupom_data }} </td>
-                      <td> {{ $cupom->aluno_name }} </td>
-                      <td> {{ $cupom->refeicao_name }} </td>
-                      <td> {{ $cupom->refeicao_valor }} </td>
+                      <td> {!! $helper->formatDate($cupom->created_at, 'd/m/Y')  !!}</td>
+                      <td> {{ $cupom->aluno->user->name }} </td>
+                      <td> {{ $cupom->refeicao->name }} </td>
+                      <td> {{ $cupom->refeicao->valor }} </td>
                     </tr>
                     
                     

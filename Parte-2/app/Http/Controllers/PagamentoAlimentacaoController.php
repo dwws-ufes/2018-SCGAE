@@ -89,29 +89,7 @@ class PagamentoAlimentacaoController extends Controller
      */
     public function show(PagamentoAlimentacao $pagamentoalimentacao)
     {
-        dd($pagamentoalimentacao->cupomalimentacao);
-        // $cupomalimentacaos = PagamentoAlimentacao::find($pagamentoalimentacao['id'])->cupomalimentacao;
-
-        // $cupomalimentacaos = PagamentoA
-
-        $queryCupom = DB::table('cupom_alimentacaos')
-                        ->where('pagamentoalimentacao_id', '=', $pagamentoalimentacao['id'])
-                        ->leftJoin('alunos', 'alunos.id', '=', 'cupom_alimentacaos.aluno_id')
-                        ->leftJoin('users', 'users.id', '=', 'alunos.user_id')
-                        ->leftJoin('refeicaos', 'refeicaos.id', '=', 'cupom_alimentacaos.refeicao_id');
-
-        $cupomalimentacaos = $queryCupom->get([
-                            'cupom_alimentacaos.id as cupom_id',
-                            'cupom_alimentacaos.created_at as cupom_data',
-                            'cupom_alimentacaos.pagamentoalimentacao_id',
-                            'alunos.matricula',
-                            'refeicaos.name as refeicao_name',
-                            'refeicaos.valor as refeicao_valor',
-                            'users.name as aluno_name'
-                            ]);
-
-        // dd($cupomalimentacaos);
-        return view('pagamentoalimentacao.show', compact('cupomalimentacaos', 'pagamentoalimentacao'));
+        return view('pagamentoalimentacao.show', compact('pagamentoalimentacao'));
     }
 
     /**

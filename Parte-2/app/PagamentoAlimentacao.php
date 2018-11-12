@@ -27,7 +27,7 @@ class PagamentoAlimentacao extends Model
      */
     public function cupomalimentacao()
     {
-        return $this->hasMany('App\CupomAlimentacao');
+        return $this->hasMany('App\CupomAlimentacao', 'pagamentoalimentacao_id');
     }
 
     public function somaValor(float $value){
