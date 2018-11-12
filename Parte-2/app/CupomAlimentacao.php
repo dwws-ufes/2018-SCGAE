@@ -50,4 +50,14 @@ class CupomAlimentacao extends Model
     {
         return $this->formatDate($this->created_at,'d/m/Y');
     }
+
+    public function getRefeicaoNameAttribute()
+    {
+        return $this->refeicao->name;
+    }
+
+    public function getRefeicaoValorAttribute()
+    {
+        return $this->refeicao->valor;
+    }
 }

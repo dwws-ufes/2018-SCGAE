@@ -28,7 +28,8 @@
               <h3 class="box-title">Lista de cupons validados:</h3>
             </div>
             <div class="box-body">
-              <table class="table table-bordered table-hover">
+              <table class="table table-bordered table-hover datatables">
+                
                 <tr>
                   <th>Data</th>
                   <th>Aluno</th>
@@ -38,35 +39,34 @@
                 </tr>
             
                 @foreach($cupomalimentacaos as $cupom)
-                    <tr>
-                      <td> {!! $helper->formatDate($cupom->created_at, 'd/m/Y')  !!} </td>
-                      <td> {{ $cupom->aluno->user->name }} </td>
-                      <td> {{ $cupom->refeicao->name }} </td>
-                      <td> {{ $cupom->refeicao->valor }} </td>
-                      <td> 
-                          <form method="post" action="<?php echo route('cupomalimentacao.update', ['cupomalimentacao' => $cupom->id]) ?>">
-                            {{-- {{method_field('PUT')}} --}}
-                            {!! csrf_field() !!}
-                            <input type="text" name="cupom_id" value="{{ $cupom->id }}" style="display: none;">
-                            <input type="text" name="refeicao_valor" value="{{ $cupom->refeicao->valor }}" style="display: none;">
-                            <input type="text" name="pagamento_id" value="{{ $pagamentoalimentacao->id }}" style="display: none;">
+                <tr>
+                  <td> {!! $helper->formatDate($cupom->created_at, 'd/m/Y')  !!} </td>
+                  <td> {{ $cupom->aluno->user->name }} </td>
+                  <td> {{ $cupom->refeicao->name }} </td>
+                  <td> {{ $cupom->refeicao->valor }} </td>
+                  <td> 
+                      <form method="post" action="<?php echo route('cupomalimentacao.update', ['cupomalimentacao' => $cupom->id]) ?>">
+                        {{-- {{method_field('PUT')}} --}}
+                        {!! csrf_field() !!}
+                        <input type="text" name="cupom_id" value="{{ $cupom->id }}" style="display: none;">
+                        <input type="text" name="refeicao_valor" value="{{ $cupom->refeicao->valor }}" style="display: none;">
+                        <input type="text" name="pagamento_id" value="{{ $pagamentoalimentacao->id }}" style="display: none;">
+                      <?php
+                        if($cupom->pagamentoalimentacao_id == $pagamentoalimentacao->id){
+                          ?>
+                            <input type="text" name="action" value="excluir" style="display: none;">
+                            <button type="submit">Excluir</button>
                           <?php
-                            if($cupom->pagamentoalimentacao_id == $pagamentoalimentacao->id){
-                              ?>
-                                <input type="text" name="action" value="excluir" style="display: none;">
-                                <button type="submit">Excluir</button>
-                              </form>
-                              <?php
-                            }else{
-                              ?>
-                                <input type="text" name="action" value="incluir" style="display: none;">
-                                <button type="submit">Incluir</button>
-                              </form>
-                              <?php
-                            }
-                            ?>
-                      </td>
-                    </tr>
+                        }else{
+                          ?>
+                            <input type="text" name="action" value="incluir" style="display: none;">
+                            <button type="submit">Incluir</button>
+                          <?php
+                        }
+                        ?>
+                        </form>
+                  </td>
+                </tr>
                     
                     
 
@@ -78,5 +78,16 @@
         </div>
       </div>
     </section>
+
+@stop
+
+@section('js')
+
+<script>
+
+  $(function () {
+    $('.datatables').DataTable();
+  })
+</script>
 
 @stop

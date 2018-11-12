@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\UserAluno;
 use App\Aluno;
 use App\Refeicao;
 use App\PagamentoAlimentacao;
@@ -144,18 +145,29 @@ class CupomAlimentacaoController extends Controller
         return redirect()->route('cupomalimentacao.validate', $request);
     }
 
-    public function reportMeusCupons(Request $request)
+    public function reportMeusCupons()
     {
-        $data = $request->all();
-        if (empty($data)) {
-            $cupomalimentacaos = $this->cupomalimentacaos->withCriteria([
-                new EagerLoad(['aluno']),
-                new EagerLoad(['refeicao']),
+        $user = Auth::user();
 
-            ])->all();
 
-            return view('relatorio.meuscupons', compact('cupomalimentacaos'));
-        }
+        $aluno = UserAluno::find($user['id'])->aluno;
+
+        $cupomalimentacaos = $aluno->cupomalimentacao;
+
+        // dd($aluno->cupomalimentacao);
+        // 
+        // $cupomalimentacaos = CupomAlimentacao::with('')
+        // $cupomalimentacaos = $this->cupomalimentacaos
+
+            // ->withCriteria([
+                // new EagerLoad(['aluno']),
+                // new EagerLoad(['aluno.user']),
+                // new EagerLoad(['refeicao']),
+                // ])->all();
+            // ->findWhere('aluno[user[id]]',$user['id']);
+
+        // dd($cupomalimentacaos);
+        return view('relatorio.meuscupons', compact('cupomalimentacaos'));
     }
 
     public function listToPay(Request $request, PagamentoAlimentacao $pagamentoalimentacao)
@@ -171,8 +183,6 @@ class CupomAlimentacaoController extends Controller
                                 ])
                                 ->findWhere('pagamentoalimentacao_id', null)
                                 ->where('horario_utilizacao', '!=', null);
-
-        // dd($cupomalimentacaos);
         return view('cupomalimentacao.listtopay', compact('cupomalimentacaos', 'pagamentoalimentacao'));
     }
 
