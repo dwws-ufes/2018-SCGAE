@@ -40,18 +40,28 @@ class CupomAlimentacaoController extends Controller
         $user = Auth::user();
         $aluno = Aluno::whereUserId($user['id'])->first();
 
+        // $refeicaos = Refeicao::all()
+        // ->join('cupom_alimentacaos','refeicaos.id','=','cupomalimentacaos.refeicao_id')
+        // ->get();
+        // ->where('');
+        // dd($refeicaos);
+
         // $cupomalimentacaos = Aluno::find($aluno['id'])->cupomalimentacao()->whereDate('created_at','=',Date('Y-m-d'))->get();
+
+
 
         $refeicaos = DB::table("refeicaos")
                     ->leftJoin(
                         DB::raw(
-                        "(SELECT id as id_cupom, horario_utilizacao, created_at as emissao_cupom, refeicao_id FROM cupom_alimentacaos WHERE DATE(cupom_alimentacaos.created_at) = '" . Date('Y-m-d') . "') as cupom"
+                        "(SELECT id as id_cupom, horario_utilizacao, created_at as emissao_cupom, refeicao_id, aluno_id FROM cupom_alimentacaos WHERE DATE(cupom_alimentacaos.created_at) = '" . Date('Y-m-d') . "' AND cupom_alimentacaos.aluno_id = " . $aluno['id'] . ") as cupom"
                         ),
                         'refeicaos.id',
                         '=',
                         'cupom.refeicao_id'
                     )->orderBy("inicio")
                     ->get();
+
+        dd($refeicaos);
 
         return view('cupomalimentacao.today', compact('user', 'aluno', 'refeicaos'));
     }
@@ -76,8 +86,6 @@ class CupomAlimentacaoController extends Controller
     {
         //
         $data = $request->all();
-        // dd($data);
-
 
         $aluno = Aluno::findOrFail($data['alunoId']);
         $refeicao = Refeicao::findOrFail($data['refeicaoId']);
@@ -87,17 +95,7 @@ class CupomAlimentacaoController extends Controller
         $cupom->refeicao()->associate($refeicao);
         $cupom->save();
 
-        // $cupomAlimentacao = CupomAlimentacao::create([
-        //     'refeicao_id' => $data['refeicaoId'],
-        //     'aluno_id' => $data['alunoId']
-        // ]);
-
-
-        // return route('cupomalimentacao.show',$cupomAlimentacao);
         return redirect()->route('cupomalimentacao.today');
-
-
-        // return view('cupomalimentacao.list', compact('alunos'));
     }
 
     /**

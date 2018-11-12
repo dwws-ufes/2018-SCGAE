@@ -45,4 +45,9 @@ class CupomAlimentacao extends Model
     {
         return $this->belongsTo('App\PagamentoAlimentacao', 'pagamentoalimentacao_id');
     }
+
+    public function getFormattedCreatedAtAttribute()
+    {
+        return $this->formatDate($this->created_at,'d/m/Y');
+    }
 }
