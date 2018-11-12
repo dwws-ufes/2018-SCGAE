@@ -147,9 +147,7 @@ class AlunoController extends Controller
      */
     public function edit(Aluno $aluno)
     {
-        $user = User::find($aluno['user_id']);
-
-        return view('aluno.edit', compact('aluno', 'user'));
+        return view('aluno.edit', compact('aluno'));
     }
 
     /**
@@ -161,25 +159,31 @@ class AlunoController extends Controller
      */
     public function update(Request $request, Aluno $aluno)
     {
-        //
-        // dd($request, $aluno);
-        $data = $request->all();
+        $user_data = $request->only('email', 'name');
 
-        // $this->validator($data)->validate();
+        $endereco_data = $request->only(
+            'logradouro',
+            'numero',
+            'complemento',
+            'cep',
+            'bairro',
+            'cidade',
+            'estado',
+            'pais'
+        );
 
-        $user = User::find($aluno['user_id']);
+        $aluno_data = $request->only(
+            'telefone',
+            'matricula',
+            'cpf',
+            'rendaFamiliar',
+            'auxilioAlimentacao',
+            'auxilioTransporte'
+        );
 
-        $user['name'] = $data['name'];
-        $user->update();
-
-
-        $aluno['telefone'] = $data['telefone'];
-        $aluno['matricula'] = $data['matricula'];
-        $aluno['cpf'] = $data['cpf'];
-        $aluno['rendaFamiliar'] = $data['rendaFamiliar'];
-        $aluno['auxilioAlimentacao'] = isset($data['auxilioAlimentacao']);
-        $aluno['auxilioTransporte'] = isset($data['auxilioTransporte']);
-        $aluno->update();
+        $aluno->user()->update($user_data);
+        $aluno->endereco()->update($endereco_data);
+        $aluno->update($aluno_data);
 
         return redirect()->route('aluno.index');
     }
