@@ -9,7 +9,7 @@
                         @yield('table_title')
                     </div>
                     <div class="box-body">
-                        <table class="table table-bordered table-hover">
+                        <table class="table table-bordered table-hover datatables">
                             @yield('table_content')
                         </table>
                     </div>
