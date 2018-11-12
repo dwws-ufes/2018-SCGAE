@@ -12,6 +12,7 @@ use App\EnderecoEscola;
 use Illuminate\Support\Facades\DB;
 use App\Repositories\Contracts\EscolaRepository;
 use Kurt\Repoist\Repositories\Eloquent\Criteria\EagerLoad;
+use Illuminate\Support\Facades\Password;
 
 class EscolaController extends Controller
 {
@@ -86,6 +87,13 @@ class EscolaController extends Controller
         $escola->user()->associate($user);
         $escola->endereco()->associate($endereco);
         $escola->save();
+
+        if (env('MAIL_USERNAME') && env('MAIL_PASSWORD')) {
+            Password::broker()->sendResetLink(
+                ['email' => $data['email']]
+            );
+        }
+
 
         return redirect()->route('escola.index');
     }

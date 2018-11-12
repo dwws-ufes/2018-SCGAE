@@ -82,7 +82,6 @@ class AuthServiceProvider extends ServiceProvider
                 $ability != 'escola.create' && $ability != 'restaurante.create' &&
                 $this->isUserAdmin($user)
                 ) {
-                echo $ability;
                 return true;
             }
         });

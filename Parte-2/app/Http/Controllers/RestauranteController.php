@@ -9,6 +9,7 @@ use App\User;
 use Illuminate\Support\Facades\Hash;
 use App\Repositories\Contracts\RestauranteRepository;
 use Kurt\Repoist\Repositories\Eloquent\Criteria\EagerLoad;
+use Illuminate\Support\Facades\Password;
 
 class RestauranteController extends Controller
 {
@@ -77,6 +78,13 @@ class RestauranteController extends Controller
 
         $restaurante->user()->associate($user);
         $restaurante->save();
+
+        if (env('MAIL_USERNAME') && env('MAIL_PASSWORD')) {
+            Password::broker()->sendResetLink(
+                ['email' => $data['email']]
+            );
+        }
+
 
         return redirect()->route('restaurante.index');
     }
