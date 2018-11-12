@@ -25,7 +25,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table class="table table-bordered table-hover">
+              <table class="table table-bordered table-hover datatables">
                 {{-- <thead> --}}
                 <tr>
                   <th>Data</th>
@@ -57,4 +57,12 @@
       </div>
     </section>
 
+@stop
+
+@section('js')
+<script>
+  $(function () {
+    $('.datatables').DataTable();
+  })
+</script>
 @stop
