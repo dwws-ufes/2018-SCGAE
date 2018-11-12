@@ -61,7 +61,7 @@ class CupomAlimentacaoController extends Controller
                     )->orderBy("inicio")
                     ->get();
 
-        dd($refeicaos);
+        // dd($refeicaos);
 
         return view('cupomalimentacao.today', compact('user', 'aluno', 'refeicaos'));
     }
