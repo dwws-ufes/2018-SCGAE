@@ -47,6 +47,8 @@ class RestauranteController extends Controller
      */
     public function create()
     {
+        $this->authorize('restaurante.create');
+
         return view('restaurante.create');
     }
 

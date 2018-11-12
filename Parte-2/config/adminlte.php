@@ -4,6 +4,8 @@ use App\Escola;
 use App\Aluno;
 use App\Restaurante;
 use App\Refeicao;
+use App\CupomAlimentacao;
+use App\PagamentoAlimentacao;
 
 return [
 
@@ -138,7 +140,7 @@ return [
         [
             'text' => 'Criar Escola',
             'url'  => 'escola/create',
-            'can' => 'escola.manage',
+            'can' => 'escola.create',
             'model' => Escola::class,
         ],
         [
@@ -155,7 +157,7 @@ return [
         [
             'text' => 'Criar Restaurante',
             'url'  => 'restaurante/create',
-            'can' => 'restaurante.manage',
+            'can' => 'restaurante.create',
             'model' => Restaurante::class,
         ],
         [
@@ -185,23 +187,31 @@ return [
         [
             'text' => 'Cupons do dia',
             'url'  => 'cupomalimentacao/today',
-            // 'can'  => 'manage-blog',
+            'can' => 'cupomalimentacao.emitir',
+            'model' => CupomAlimentacao::class,
         ],
         [
             'text' => 'Validar Cupom',
             'url'  => 'cupomalimentacao/validate',
-            // 'can'  => 'manage-blog',
+            'can' => 'cupomalimentacao.validar',
+            'model' => CupomAlimentacao::class,
         ],
-        'AÇÕES PARA PAGAMENTOS',
+        [
+            'header' => 'AÇÕES PARA PAGAMENTOS',
+            'can' => 'pagamentoalimentacao.manage',
+            'model' => PagamentoAlimentacao::class,
+        ],
         [
             'text' => 'Criar Pagamento Alimentação',
             'url'  => 'pagamentoalimentacao/create',
-            // 'can'  => 'manage-blog',
+            'can' => 'pagamentoalimentacao.manage',
+            'model' => PagamentoAlimentacao::class,
         ],
         [
             'text' => 'Listar Pagamentos Alimentação',
             'url'  => 'pagamentoalimentacao',
-            // 'can'  => 'manage-blog',
+            'can' => 'pagamentoalimentacao.manage',
+            'model' => PagamentoAlimentacao::class,
         ],
 
         'RELATÓRIOS',

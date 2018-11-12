@@ -11,6 +11,10 @@ use App\Policies\RefeicaoPolicy;
 use App\Restaurante;
 use App\Policies\RestaurantePolicy;
 use App\UserEscola;
+use App\UserAluno;
+use App\UserRestaurante;
+use App\Escola;
+use function Psy\debug;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -23,6 +27,36 @@ class AuthServiceProvider extends ServiceProvider
         'App\Model' => 'App\Policies\ModelPolicy',
     ];
 
+    private function isUserAdmin($user)
+    {
+        return $user->id === 1;
+    }
+
+    private function isUserEscola($user)
+    {
+        return UserEscola::find($user->id)->escola !== null;
+    }
+
+    private function isUserAluno($user)
+    {
+        return UserAluno::find($user->id)->aluno !== null;
+    }
+
+    private function isUserRestaurante($user)
+    {
+        return UserRestaurante::find($user->id)->restaurante !== null;
+    }
+
+    private function checkExistingEscolas()
+    {
+        return Escola::all()->count() > 0;
+    }
+
+    private function checkExistingRestaurantes()
+    {
+        return Restaurante::all()->count() > 0;
+    }
+
     /**
      * Register any authentication / authorization services.
      *
@@ -33,7 +67,11 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::before(function ($user, $ability) {
-            if ($user->name == 'Admin') {
+            if (
+                $ability != 'escola.create' && $ability != 'restaurante.create' &&
+                $this->isUserAdmin($user)
+                ) {
+                echo $ability;
                 return true;
             }
         });
@@ -42,16 +80,40 @@ class AuthServiceProvider extends ServiceProvider
             return false;
         });
 
+        Gate::define('escola.create', function ($user, $escola = null) {
+            return Gate::allows('escola.manage') && ! $this->checkExistingEscolas();
+        });
+
         Gate::define('aluno.manage', function ($user, $aluno = null) {
-            return UserEscola::find($user->id)->escola;
+            return $this->isUserEscola($user);
         });
 
         Gate::define('restaurante.manage', function ($user, $restaurante = null) {
-            return UserEscola::find($user->id)->escola;
+            return $this->isUserEscola($user);
+        });
+
+        Gate::define('restaurante.create', function ($user, $restaurante = null) {
+            return Gate::allows('restaurante.manage') && !$this->checkExistingRestaurantes();
         });
 
         Gate::define('refeicao.manage', function ($user, $refeicao = null) {
-            return UserEscola::find($user->id)->escola;
+            return $this->isUserEscola($user);
+        });
+
+        Gate::define('cupomalimentacao.emitir', function ($user, $cupomalimentacao = null) {
+            return $this->isUserAluno($user);
+        });
+
+        Gate::define('cupomalimentacao.validar', function ($user, $cupomalimentacao = null) {
+            return $this->isUserRestaurante($user);
+        });
+
+        Gate::define('cupomalimentacao.pagar', function ($user, $cupomalimentacao = null) {
+            return $this->isUserEscola($user);
+        });
+
+        Gate::define('pagamentoalimentacao.manage', function ($user, $pagamentoalimentacao = null) {
+            return $this->isUserEscola($user);
         });
     }
 }

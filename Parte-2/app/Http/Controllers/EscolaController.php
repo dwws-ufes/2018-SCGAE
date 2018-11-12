@@ -43,6 +43,8 @@ class EscolaController extends Controller
      */
     public function create()
     {
+        $this->authorize('escola.create');
+
         return view('escola.create');
     }
 
