@@ -106,7 +106,7 @@ class EscolaController extends Controller
      */
     public function show(Escola $escola)
     {
-        //
+        return view('escola.show', compact('escola'));
     }
 
     /**

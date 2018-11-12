@@ -136,9 +136,7 @@ class AlunoController extends Controller
      */
     public function show(Aluno $aluno)
     {
-        //
-
-        // $user = User::show()
+        return view('aluno.show', compact('aluno'));
     }
 
     /**

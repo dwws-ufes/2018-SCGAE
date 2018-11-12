@@ -15,6 +15,10 @@
         ],
         'items' => $escolas,
         'acoes' => [
+            'escola.show' => [
+                'params' => ['id'],
+                'link' => 'Ver'
+            ],
             'escola.edit' => [
                 'params' => ['id'],
                 'link' => 'Editar'

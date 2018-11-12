@@ -21,10 +21,14 @@
         ],
         'items' => $alunos,
         'acoes' => [
+            'aluno.show' => [
+                'params' => ['id'],
+                'link' => 'Ver'
+            ],
             'aluno.edit' => [
                 'params' => ['id'],
                 'link' => 'Editar'
-            ]
+            ],
         ],
     ])
 @stop

@@ -97,7 +97,7 @@ class RestauranteController extends Controller
      */
     public function show(Restaurante $restaurante)
     {
-        //
+        return view('restaurante.show', compact('restaurante'));
     }
 
     /**

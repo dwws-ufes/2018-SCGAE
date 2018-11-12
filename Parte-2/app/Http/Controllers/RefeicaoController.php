@@ -65,7 +65,7 @@ class RefeicaoController extends Controller
      */
     public function show(Refeicao $refeicao)
     {
-        //
+        return view('refeicao.show', compact('refeicao'));
     }
 
     /**
@@ -76,9 +76,6 @@ class RefeicaoController extends Controller
      */
     public function edit(Refeicao $refeicao)
     {
-        //
-        // dd($refeicao);
-
         return view('refeicao.edit', compact('refeicao'));
     }
 

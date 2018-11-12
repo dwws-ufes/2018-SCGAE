@@ -15,6 +15,10 @@
         ],
         'items' => $restaurantes,
         'acoes' => [
+            'restaurante.show' => [
+                'params' => ['id'],
+                'link' => 'Ver'
+            ],
             'restaurante.edit' => [
                 'params' => ['id'],
                 'link' => 'Editar'

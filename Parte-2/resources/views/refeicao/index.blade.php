@@ -16,6 +16,10 @@
         ],
         'items' => $refeicaos,
         'acoes' => [
+            'refeicao.show' => [
+                'params' => ['id'],
+                'link' => 'Ver'
+            ],
             'refeicao.edit' => [
                 'params' => ['id'],
                 'link' => 'Editar'
