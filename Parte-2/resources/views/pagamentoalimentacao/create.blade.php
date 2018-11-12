@@ -53,7 +53,7 @@
                             <input type="text" name="refeicao_valor" value="{{ $cupom->refeicao_valor }}" style="display: none;">
                             <input type="text" name="pagamento_id" value="{{ $pagamentoalimentacaos->id }}" style="display: none;">
                           <?php
-                            if($cupom->pagamento_alimentacao_id == $pagamentoalimentacaos->id){
+                            if($cupom->pagamentoalimentacao_id == $pagamentoalimentacaos->id){
                               ?>
                                 <input type="text" name="action" value="excluir" style="display: none;">
                                 <button type="submit">Excluir</button>

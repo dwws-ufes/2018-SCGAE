@@ -189,9 +189,9 @@ class CupomAlimentacaoController extends Controller
         $pagamentoalimentacao = PagamentoAlimentacao::find($data['pagamento_id']);
 
         $cupomalimentacao->pagamentoalimentacao()->associate($pagamentoalimentacao);
-        $cupomalimentacao->save();
+        $cupomalimentacao->update();
         $pagamentoalimentacao->somaValor($cupomalimentacao->refeicao->valor);
-        $pagamentoalimentacao->save();
+        $pagamentoalimentacao->update();
         return redirect()->route('cupomalimentacao.listtopay', ['pagamentoalimentacao' => $pagamentoalimentacao]); 
     }
 

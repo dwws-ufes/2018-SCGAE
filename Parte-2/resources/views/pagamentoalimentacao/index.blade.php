@@ -63,7 +63,7 @@
                         <td>
                           <?php if($pagamento->data_pagamento==null){
                             ?>
-                              <a href="pagamentoalimentacao/create">Ir para este pagamento</a>
+                              <a href="cupomalimentacao/listTooPay/{{ $pagamento->id }}">Ir para este pagamento</a>
                             <?php
                           }else{
                             ?>

@@ -5,7 +5,7 @@
 @section('title', 'Lista de Alunos')
 
 @section('content_header')
-    <h1>Criando Pagamento de Cupom Alientacaçõ</h1>
+    <h1>Criando Pagamento de Cupom Alientação</h1>
 @stop
 
 @section('content')
@@ -17,7 +17,7 @@
             <div class="box-header">
               <h2 class="box-title">Valor total do pagamento até o momento: {{ $pagamentoalimentacao->valor }}</h2>
               
-              <form method="post" action="<?php echo route('pagamentoalimentacao.setpagamento'); ?>" style="float:right;">
+              <form method="post" action="<?php echo route('pagamentoalimentacao.dopayment', ['pagamentoalimentacao' => $pagamentoalimentacao->id]); ?>" style="float:right;">
                 {!! csrf_field() !!}
                 <input type="text" name="pagamento_id" value="{{ $pagamentoalimentacao->id }}" style="display: none;">
                 <input type="text" name="action" value="pagar" style="display: none;">
@@ -51,7 +51,7 @@
                             <input type="text" name="refeicao_valor" value="{{ $cupom->refeicao->valor }}" style="display: none;">
                             <input type="text" name="pagamento_id" value="{{ $pagamentoalimentacao->id }}" style="display: none;">
                           <?php
-                            if($cupom->pagamento_alimentacao_id == $pagamentoalimentacao->id){
+                            if($cupom->pagamentoalimentacao_id == $pagamentoalimentacao->id){
                               ?>
                                 <input type="text" name="action" value="excluir" style="display: none;">
                                 <button type="submit">Excluir</button>

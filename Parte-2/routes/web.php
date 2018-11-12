@@ -55,7 +55,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/pagamentoalimentacao/create', 'PagamentoAlimentacaoController@create')->name('pagamentoalimentacao.create');
     Route::get('/pagamentoalimentacao', 'PagamentoAlimentacaoController@index')->name('pagamentoalimentacao.index');
-    Route::post('/pagamentoalimentacao/create', 'PagamentoAlimentacaoController@setPagamento')->name('pagamentoalimentacao.setpagamento');
+    Route::post('/pagamentoalimentacao/update/{pagamentoalimentacao}', 'PagamentoAlimentacaoController@update')->name('pagamentoalimentacao.dopayment');
     Route::get('pagamentoalimentacao/{pagamentoalimentacao}', ['as' => 'pagamentoalimentacao.show', 'uses' => 'PagamentoAlimentacaoController@show']);
 
 

@@ -33,4 +33,8 @@ class PagamentoAlimentacao extends Model
     public function somaValor(float $value){
         $this->valor += $value;
     }
+
+    public function setDataPagamento(string $date){
+        $this->data_pagamento = $date;
+    }
 }
