@@ -219,14 +219,14 @@ return [
             'text' => 'Meus cupons',
             'url'  => 'relatorio/meuscupons',
         ],
-        [
-            'text' => 'Cupons Validados',
-            'url'  => 'b',
-        ],
-        [
-            'text' => 'Pagamentos',
-            'url'  => 'c',
-        ],
+        // [
+        //     'text' => 'Cupons Validados',
+        //     'url'  => 'b',
+        // ],
+        // [
+        //     'text' => 'Pagamentos',
+        //     'url'  => 'c',
+        // ],
 
         // [
         //     'text'        => 'Pages',
