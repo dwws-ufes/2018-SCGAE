@@ -23,6 +23,50 @@ class EscolaController extends Controller
         $this->escolas = $escolas;
     }
 
+    public function searchSchool($schoolName)
+    {
+        \EasyRdf_Namespace::set('wd', 'http://www.wikidata.org/entity/');
+        \EasyRdf_Namespace::set('wdt', 'http://www.wikidata.org/prop/direct/');
+        \EasyRdf_Namespace::set('wikibase', 'http://wikiba.se/ontology#');
+        \EasyRdf_Namespace::set('p', 'http://www.wikidata.org/prop/');
+        \EasyRdf_Namespace::set('ps', 'http://www.wikidata.org/prop/statement/');
+        \EasyRdf_Namespace::set('pq', 'http://www.wikidata.org/prop/qualifier/');
+        \EasyRdf_Namespace::set('rdfs', 'http://www.w3.org/2000/01/rdf-schema#');
+        \EasyRdf_Namespace::set('bd', 'http://www.bigdata.com/rdf#');
+        $sparql = new \EasyRdf_Sparql_Client('https://query.wikidata.org/sparql');
+
+        $result = $sparql->query(
+            'SELECT  ?university ?universityLabel ?coordinate_location WHERE {' .
+                'SERVICE wikibase:label {' .
+                '        bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en" .' .
+                '}' .
+                '?university wdt:P17 wd:Q155 .' .
+                '        ?university wdt:P31 wd:Q3918 .' .
+                '        ?university wdt:P625 ?coordinate_location .' .
+                '}'
+        );
+
+        foreach ($result as $row) {
+            $university = $row->universityLabel->getValue();
+
+            if ($university == $schoolName) {
+                $coordinates = explode(' ', trim(
+                    str_replace('Point', '', $row->coordinate_location->getValue()),
+                    '()'
+                ));
+
+                return [
+                    // coordenadas vem invertidas
+                    'lat' => $coordinates[1],
+                    'long' => $coordinates[0],
+                ];
+            }
+        }
+        // dd($data);
+
+        return false;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -33,11 +77,6 @@ class EscolaController extends Controller
         $escolas = $this->escolas->withCriteria([
             new EagerLoad(['user']),
         ])->all();
-
-        $foaf = new \EasyRdf_Graph("http://njh.me/foaf.rdf");
-        $foaf->load();
-        $me = $foaf->primaryTopic();
-        echo "My name is: " . $me->get('foaf:name') . "\n";
 
         return view('escola.index', compact('escolas'));
     }
@@ -99,7 +138,6 @@ class EscolaController extends Controller
             );
         }
 
-
         return redirect()->route('escola.index');
     }
 
@@ -147,6 +185,11 @@ class EscolaController extends Controller
             'pais'
         );
 
+        if ($webSchool = $this->searchSchool($user_data['name'])) {
+            $endereco_data['lat'] = $webSchool['lat'];
+            $endereco_data['long'] = $webSchool['long'];
+        }
+
         $escola_data = $request->only(
             'cnpj'
         );
@@ -154,6 +197,7 @@ class EscolaController extends Controller
         $escola->user()->update($user_data);
         $escola->endereco()->update($endereco_data);
         $escola->update($escola_data);
+
 
         return redirect()->route('escola.index');
     }

@@ -23,5 +23,7 @@ class Endereco extends Model
         'cidade',
         'estado',
         'pais',
+        'lat',
+        'long',
     ];
 }

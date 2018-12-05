@@ -21,6 +21,8 @@
                 'endereco.cidade' => 'Cidade',
                 'endereco.estado' => 'Estado',
                 'endereco.pais' => 'País',
+                'endereco.lat' => 'Latitude',
+                'endereco.long' => 'Longitude',
                 'created_at' => 'Criado em',
                 'updated_at' => 'Atualizado em'
             ] ])

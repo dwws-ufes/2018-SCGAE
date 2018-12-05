@@ -12,6 +12,8 @@
             'user.name' => 'Nome',
             'cnpj' => 'CNPJ',
             'user.email' => 'Email',
+            'endereco.lat' => 'Latitide',
+            'endereco.long' => 'Longitude',
         ],
         'items' => $escolas,
         'acoes' => [
