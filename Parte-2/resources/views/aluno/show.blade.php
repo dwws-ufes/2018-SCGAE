@@ -7,6 +7,12 @@
 @stop
 @section ('content')
     <div class="box box-warning">
+        <div class="box-header">
+
+            <a class="btn btn-success btn-large" href="{!! route('semantic.aluno', ['aluno' => $aluno]) !!}">
+                Ver em RDF
+            </a>
+        </div>
         <div class="box-body table-responsive">
             @include ('partials.show-entity', [ 'entity' => $aluno, 'fields' => [
                 'id' => 'Identificador',

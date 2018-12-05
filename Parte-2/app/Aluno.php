@@ -65,4 +65,9 @@ class Aluno extends Model
     {
         return $this->formatDate($this->created_at);
     }
+
+    public function getIdentifier()
+    {
+        return $this->id;
+    }
 }

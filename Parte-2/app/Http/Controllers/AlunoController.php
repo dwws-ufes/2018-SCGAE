@@ -100,7 +100,7 @@ class AlunoController extends Controller
 
         $endereco->save();
 
-        $userEscola = UserEscola::find(Auth::user()->id) ;
+        $userEscola = UserEscola::find(Auth::user()->id)->escola ;
         $escola = $userEscola ? $userEscola->escola : Escola::firstOrFail();
 
         $aluno = new Aluno([
@@ -137,6 +137,35 @@ class AlunoController extends Controller
     public function show(Aluno $aluno)
     {
         return view('aluno.show', compact('aluno'));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Aluno  $aluno
+     * @return \Illuminate\Http\Response
+     */
+    public function semantic(Aluno $aluno)
+    {
+        // $format_options = array();
+        // foreach (\EasyRdf_Format::getFormats() as $format) {
+        //     if ($format->getSerialiserClass()) {
+        //         $format_options[$format->getLabel()] = $format->getName();
+        //     }
+        // }
+        // dd($format_options);
+        $graph = new \EasyRdf_Graph();
+        $me = $graph->resource(url()->current(), 'foaf:Person');
+        $me->set('foaf:name', $aluno->user->name);
+        $me->set('foaf:phone', $aluno->telefone);
+
+        $email = $graph->resource("mailto:" . $aluno->user->email);
+        $me->add('foaf:mbox', $email);
+
+        $data = $graph->serialise('rdfxml');
+        // dd($data);
+
+        return response($data)->header('Content-Type', 'application/rdf+xml');
     }
 
     /**
