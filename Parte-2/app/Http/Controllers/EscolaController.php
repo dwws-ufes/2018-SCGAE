@@ -34,6 +34,11 @@ class EscolaController extends Controller
             new EagerLoad(['user']),
         ])->all();
 
+        $foaf = new \EasyRdf_Graph("http://njh.me/foaf.rdf");
+        $foaf->load();
+        $me = $foaf->primaryTopic();
+        echo "My name is: " . $me->get('foaf:name') . "\n";
+
         return view('escola.index', compact('escolas'));
     }
 
