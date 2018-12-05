@@ -25,6 +25,10 @@ class EscolaController extends Controller
 
     public function searchSchool($schoolName)
     {
+        /*
+        debug url
+        https://query.wikidata.org/#PREFIX%20wd%3A%20%3Chttp%3A%2F%2Fwww.wikidata.org%2Fentity%2F%3E%0APREFIX%20wdt%3A%20%3Chttp%3A%2F%2Fwww.wikidata.org%2Fprop%2Fdirect%2F%3E%0APREFIX%20wikibase%3A%20%3Chttp%3A%2F%2Fwikiba.se%2Fontology%23%3E%0APREFIX%20p%3A%20%3Chttp%3A%2F%2Fwww.wikidata.org%2Fprop%2F%3E%0APREFIX%20ps%3A%20%3Chttp%3A%2F%2Fwww.wikidata.org%2Fprop%2Fstatement%2F%3E%0APREFIX%20pq%3A%20%3Chttp%3A%2F%2Fwww.wikidata.org%2Fprop%2Fqualifier%2F%3E%0APREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20bd%3A%20%3Chttp%3A%2F%2Fwww.bigdata.com%2Frdf%23%3E%0A%0ASELECT%20DISTINCT%20%3Funiversity%20%3FuniversityLabel%20%3Fcoordinate_location%20WHERE%20%7B%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%0A%20%20%20%20bd%3AserviceParam%20wikibase%3Alanguage%20%22%5BAUTO_LANGUAGE%5D%2Cen%22.%20%0A%20%20%7D%0A%20%20%3Funiversity%20wdt%3AP17%20wd%3AQ155.%0A%20%20%3Funiversity%20wdt%3AP31%20wd%3AQ3918.%0A%20%20%3Funiversity%20wdt%3AP625%20%3Fcoordinate_location.%0A%7D
+         */
         \EasyRdf_Namespace::set('wd', 'http://www.wikidata.org/entity/');
         \EasyRdf_Namespace::set('wdt', 'http://www.wikidata.org/prop/direct/');
         \EasyRdf_Namespace::set('wikibase', 'http://wikiba.se/ontology#');
